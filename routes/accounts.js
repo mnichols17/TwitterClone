@@ -21,7 +21,7 @@ const accounts = [
 
 // Gets all accounts (Purely for testing)
 router.get("/", (req, res) => {
-    res.send(accounts)
+    res.json(accounts)
 })
 
 // Gets an accounts
