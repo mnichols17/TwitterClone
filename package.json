@@ -1,0 +1,26 @@
+{
+  "name": "twitterclone",
+  "version": "1.0.0",
+  "description": "back-end API for my Twitter Clone",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mnichols17/TwitterClone.git"
+  },
+  "author": "MN",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mnichols17/TwitterClone/issues"
+  },
+  "homepage": "https://github.com/mnichols17/TwitterClone#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
