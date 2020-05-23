@@ -8,7 +8,7 @@ const accounts = [
         username: "admin",
         password: "admin",
         email: "admin@gmail.com",
-        name: "Mr. Admin",
+        name: "Admin Admin",
     },
     {
         id: 1,
@@ -32,9 +32,16 @@ router.get("/:id", (req, res) => {
     })
 })
 
-// Creates a user account
+// Creates an account
 router.post("/", (req, res) => {
-    console.log("CREATE ACCOUNT")
+    accounts.push({
+        id: accounts[accounts.length - 1].id + 1,
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email,
+        name: req.body.name
+    })
+    res.send(accounts)
 })
 
 // Edits a user account

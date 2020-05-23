@@ -1,32 +1,32 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {createAccounts} from '../actions/accountActions';
+import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 
-function Home(props) {
+const Home = props => {
+
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
+    const onSubmit = e => {
+        e.preventDefault();
+        console.log(username, password);
+    }
+
     return(
-        <form>
-            <label htmlFor="username">Username:</label>
-            <input type="text" id="username" name="username" />
-            <br/>
-            <label htmlFor="password">Password:</label>
-            <input type="text" id="password" name="password" />
-            <br/>
-            {/* add a check for password */}
-            <label htmlFor="name">Name:</label>
-            <input type="text" id="name" name="name" />
-            <br/>
-            <label htmlFor="email">Email:</label>
-            <input type="email" id="email" name="email" />
-            <br/>
-            <input type="submit" value="Submit" />
-        </form>
+        <div>
+            <form onSubmit={onSubmit}>
+                <label htmlFor="username">Username:</label>
+                <input type="text" id="username" onChange={e => {setUsername(e.target.value)}} value={username}/>
+                <br/>
+                <label htmlFor="password">Password:</label>
+                <input type="text" id="password" onChange={e => {setPassword(e.target.value)}} value={password} />
+                <input type="submit" value="Submit" />
+            </form>
+            <Link to="/register">REGISTER</Link>
+            <br />
+            <br />
+            <Link to="/accounts">ACCOUNTS</Link>
+        </div>
     )
 }
 
-// const mapStateToProps = (state) => {
-//     return {
-//         accounts: state.accounts.accounts
-//     }
-// }
-
-export default connect(null, {createAccounts})(Home)
+export default Home;

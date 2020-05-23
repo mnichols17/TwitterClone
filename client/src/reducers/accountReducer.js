@@ -14,7 +14,7 @@ export default function (state = defaultState, action) {
             }
         case("CREATE_ACCOUNT"):
             return {
-                ...state
+                accounts: action.payload
             }
         default:
             return state;
