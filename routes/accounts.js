@@ -3,7 +3,9 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// userId, username, password, email, name (profile pic?)
+const Account = require('../models/Account');
+
+// userId, username, password, email, name (profile pic at some point)
 const accounts = [
     {
         id: 0,
@@ -23,7 +25,9 @@ const accounts = [
 
 // Gets all accounts (Purely for testing)
 router.get("/", (req, res) => {
-    res.json(accounts)
+    Account.find()
+        .sort({date: -1})
+        .then(accounts => res.json(accounts))
 })
 
 // Gets an accounts
@@ -35,35 +39,38 @@ router.get("/:id", (req, res) => {
 
 // Creates an account
 router.post("/", (req, res) => {
-    let {username, password, email, name} = req.body
+    const {username, password, email, name} = req.body
 
     if(!username || !password || !email || !name) return res.status(400).json({Error: "Please enter all fields"})
 
     //At some point, check if user exists in DB
 
+    const newAccount = new Account({
+        username,
+        password,
+        email,
+        name
+    })
+
     bcrypt.genSalt((err, salt) => {
-        bcrypt.hash(password, salt, (err, hash) => {
+        bcrypt.hash(newAccount.password, salt, (err, hash) => {
             if (err) throw err;
-            password = hash;
-            let id = accounts[accounts.length - 1].id + 1
-            accounts.push({
-                id,
-                username,
-                password,
-                email,
-                name
-            })
-            jwt.sign({id}, "secrekey", {expiresIn: 3600}, (err, token) => {
-                if (err) throw err;
-                res.json({
-                    token,
-                    account: {
-                        id,
-                        name,
-                        email,
-                    }
+            newAccount.password = hash;
+            newAccount.save()
+                .then(account => {
+                    jwt.sign({id: account.id}, "secrekey", {expiresIn: 3600}, (err, token) => {
+                        if (err) throw err;
+                        res.json({
+                            token,
+                            account: {
+                                id: account.id,
+                                username: account.username,
+                                email: account.email,
+                                name: account.name
+                            }
+                        })
+                    })
                 })
-            })
         })
     })
 })
