@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 // userId, username, password, email, name (profile pic?)
 const accounts = [
@@ -26,7 +28,6 @@ router.get("/", (req, res) => {
 
 // Gets an accounts
 router.get("/:id", (req, res) => {
-    console.log(req.params.id);
     res.send({
         msg: req.params.id
     })
@@ -34,14 +35,37 @@ router.get("/:id", (req, res) => {
 
 // Creates an account
 router.post("/", (req, res) => {
-    accounts.push({
-        id: accounts[accounts.length - 1].id + 1,
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email,
-        name: req.body.name
+    let {username, password, email, name} = req.body
+
+    if(!username || !password || !email || !name) return res.status(400).json({Error: "Please enter all fields"})
+
+    //At some point, check if user exists in DB
+
+    bcrypt.genSalt((err, salt) => {
+        bcrypt.hash(password, salt, (err, hash) => {
+            if (err) throw err;
+            password = hash;
+            let id = accounts[accounts.length - 1].id + 1
+            accounts.push({
+                id,
+                username,
+                password,
+                email,
+                name
+            })
+            jwt.sign({id}, "secrekey", {expiresIn: 3600}, (err, token) => {
+                if (err) throw err;
+                res.json({
+                    token,
+                    account: {
+                        id,
+                        name,
+                        email,
+                    }
+                })
+            })
+        })
     })
-    res.send(accounts)
 })
 
 // Edits a user account
