@@ -1,10 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {getAccounts} from '../actions/accountActions';
 
 class AccountList extends React.Component {
 
     componentDidMount = () => {
+        console.log(this.props)
         this.props.getAccounts();
     }
 
@@ -16,7 +18,7 @@ class AccountList extends React.Component {
                     {
                         this.props.accounts.map(account => {
                             return(
-                                <li key={account.id}>{account.username} - {account.name}</li>
+                                <li key={account._id}><Link to={`/profile/${account.username}`}>{account.username} - {account.name}</Link></li>
                             )
                         })
                     }
@@ -28,7 +30,8 @@ class AccountList extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        accounts: state.accounts.accounts
+        accounts: state.accounts.accounts,
+        test: state
     }
 }
 

@@ -1,19 +1,52 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect, Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {getAccounts} from '../actions/accountActions';
 
 import Home from './Home';
 import Register from './Register';
 import AccountList from './AccountList';
+import Profile from './Profile';
+import Login from './Login';
 
-export default function App() {
-    return(
-        <Router>
-            <Switch>
-                <Route path="/" exact component={Home} />
-                <Route path="/register" component={Register} />
-                <Route path="/accounts" component={AccountList} />
-                <Redirect to="/" />
-            </Switch>
-        </Router>
+const authRoutes = () => {
+    return (
+        <Switch>
+            <Route path="/" exact component={Profile} />
+            <Redirect to="/" />
+        </Switch>
     )
 }
+
+const Routes = () => {
+    return (
+        <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/accounts" component={AccountList} />
+            <Redirect to="/" />
+        </Switch>
+    )
+}
+
+// Change to function?
+class App extends React.Component {
+
+    render() {
+        return(
+            <Router>
+                <Link to="/">HOME</Link>
+                {this.props.isAuthenticated ? authRoutes() : Routes()}
+            </Router>
+        )
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.accounts.isAuthenticated
+    }
+}
+
+export default connect(mapStateToProps)(App);

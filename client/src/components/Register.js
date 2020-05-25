@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {createAccount} from '../actions/accountActions';
+import {registerAccount} from '../actions/accountActions';
 
 function Register(props) {
 
@@ -12,8 +12,8 @@ function Register(props) {
 
     const onSubmit = e => {
         e.preventDefault();
-        props.createAccount(newUsername, newPassword, newEmail, newName)
-        props.history.push("/accounts")
+        props.registerAccount(newUsername, newPassword, newEmail, newName)
+        //props.history.push("/accounts")
     }
 
     return(
@@ -36,4 +36,4 @@ function Register(props) {
     )
 }
 
-export default connect(null, {createAccount})(Register)
+export default connect(null, {registerAccount})(Register)

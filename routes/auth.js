@@ -10,15 +10,15 @@ const Account = require('../models/Account');
 
 // POST: Authenticates account and returns access token
 router.post('/', (req, res) => {
-    const {username, email, password} = req.body;
+    const {user, password} = req.body;
 
-    if(!username || !email || !password) return res.status(400).json({Error: "Missing Account Information"})
+    if(!user || !password) return res.status(400).json({Error: "Missing Account Information"})
 
     Account.findOne(
         { 
-            $and: [
-                {username: username},
-                {email: email}
+            $or: [
+                {username: user},
+                {email: user}
             ]
         }
     )
@@ -30,15 +30,7 @@ router.post('/', (req, res) => {
             if(!match) return res.status(400).json({Error: "Incorrect password"})
             jwt.sign({id: account.id}, process.env.SECRET, {expiresIn: 3600}, (err, token) => {
                 if (err) throw err;
-                res.status(201).json({
-                    token,
-                    account: {
-                        id: account.id,
-                        username: account.username,
-                        email: account.email,
-                        name: account.name
-                    }
-                })
+                res.status(201).json({token})
             })
         })
     })
