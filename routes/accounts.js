@@ -7,18 +7,21 @@ require('dotenv').config()
 const Account = require('../models/Account');
 const auth = require('../middleware/auth');
 
+// Route: /api/accounts
+
 // GET: Gets all accounts (Purely for testing)
 router.get("/all", (req, res) => {
     Account.find()
-        .sort({date: -1})
-        .then(accounts => res.json(accounts))
+    .sort({date: -1})
+    .select("-password -__v")
+    .then(accounts => res.json(accounts))
 })
 
 // GET: Gets account information (using token)
 router.get("/", auth, (req, res) => {
     Account.findById(req.user.id)
-        .select("-password")
-        .then(account => res.json(account))
+    .select("-password -__v")
+    .then(account => res.json(account))
 })
 
 // POST: Creates an account and assigns token
@@ -50,20 +53,20 @@ router.post("/", (req, res) => {
                 if (err) throw err;
                 newAccount.password = hash;
                 newAccount.save()
-                    .then(account => {
-                        jwt.sign({id: account.id}, process.env.SECRET, {expiresIn: 3600}, (err, token) => {
-                            if (err) throw err;
-                            res.status(201).json({
-                                token,
-                                account: {
-                                    id: account.id,
-                                    username: account.username,
-                                    email: account.email,
-                                    name: account.name
-                                }
-                            })
+                .then(account => {
+                    jwt.sign({id: account.id}, process.env.SECRET, {expiresIn: 3600}, (err, token) => {
+                        if (err) throw err;
+                        res.status(201).json({
+                            token,
+                            account: {
+                                id: account.id,
+                                username: account.username,
+                                email: account.email,
+                                name: account.name
+                            }
                         })
                     })
+                })
             })
         })
     })
@@ -73,20 +76,18 @@ router.post("/", (req, res) => {
 router.put("/", auth, (req, res) => {
     // Test for multiple input changes & check if fields exist
     Account.updateOne({_id: req.user.id}, {$set: {username: req.body.username}})
-        .then(response => {
-            if(response.n === 0) return res.status(400).json({Error: "Account doesn't exist"}) // Probaby able to delete this one
-            else if (response.nModified === 0) return res.status(400).json({Error: "Nothing was changed on the account"})
-            res.json({msg: "Account modified"})
-        })
+    .then(response => {
+        if(response.n === 0) return res.status(400).json({Error: "Account doesn't exist"}) // Probaby able to delete this one
+        else if (response.nModified === 0) return res.status(400).json({Error: "Nothing was changed on the account"})
+        res.json({msg: "Account modified"})
+    })
 })
 
 // DELETE: Deletes a user account
 router.delete("/", auth, (req, res) => {
-    Account.remove({_id: req.user.id},{justOne: true})
-    .then(response => {
-        if (response.deletedCount === 0) return res.status(400).json({Error: "Account doesn't exist"}) // Probaby able to delete this one
-        res.json({msg: "Account deleted"})
-    })
+    Account.deleteOne({_id: req.user.id})
+    .then(response => res.json({msg: "Account Deleted"}))
+    // if (response.deletedCount === 0) return res.status(400).json({Error: "Account doesn't exist"}) // Probaby able to delete this one
 })
 
 module.exports = router;
