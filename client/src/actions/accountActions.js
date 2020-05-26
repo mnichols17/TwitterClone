@@ -29,7 +29,10 @@ export const getAccount = () => dispatch => {
     })
     .catch(err => {
         // TOKEN INVALID (ACCOUTNS DELETED TOKEN WILL STILL WORK WHILE VALID)
-        console.log(err)
+        dispatch({
+            type: "ERROR",
+            payload: err
+        })
         //console.log(err.response.data.Error)
     })
 }
@@ -51,6 +54,10 @@ export const editAccount = (username) => dispatch => {
     .catch(err => {
         // TOKEN INVALID
         console.log(err.response.data.Error)
+        dispatch({
+            type: "ERROR",
+            payload: err
+        })
     })
 }
 
@@ -69,6 +76,10 @@ export const deleteAccount = () => dispatch => {
     .catch(err => {
         // TOKEN INVALID
         console.log(err.response.data.Error)
+        dispatch({
+            type: "ERROR",
+            payload: err
+        })
     })
 }
 
@@ -86,6 +97,10 @@ export const loginAccount = (user, password) => dispatch => {
     .catch(err => {
         // IF PASSWORD INCORRECT or ACCOUNT DOESN'T EXIST
         console.log(err.response.data.Error)
+        dispatch({
+            type: "ERROR",
+            payload: err
+        })
     })
 }
 
@@ -108,5 +123,9 @@ export const registerAccount = (username, password, email, name) => dispatch => 
     .catch(err => {
         // ACCOUNT ALREADY EXISTS
         console.log(err.response.data.Error)
+        dispatch({
+            type: "ERROR",
+            payload: err
+        })
     })
 }

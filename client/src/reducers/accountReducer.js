@@ -5,8 +5,8 @@ const defaultState = {
 }
 
 // GET ACCOUNT, EDIT ACCOUNT, DELETE ACCOUNT, <- NEED TOKEN FOR INFORMATION
-// REGISTER ACCOUNT, LOGIN ACCOUNT, LOGOUT ACCOUNT <- HANDLE TOKEN
-// LOGIN FAIL <- SEND ERROR
+// REGISTER ACCOUNT, LOGIN SUCCESS, LOGOUT SUCCESS <- HANDLE TOKEN
+// LOGIN FAIL, ERROR <- SEND ERROR
 
 export default function (state = defaultState, action) {
     switch(action.type){
@@ -29,6 +29,13 @@ export default function (state = defaultState, action) {
             }
         case("LOGOUT_SUCCESS"):
         case("DELETE_ACCOUNT"):
+            return {
+                ...state,
+                isAuthenticated: false
+            }
+        case("LOGIN_FAIL"):
+        case("ERROR"):
+            console.log(action.payload);
             return {
                 ...state,
                 isAuthenticated: false
