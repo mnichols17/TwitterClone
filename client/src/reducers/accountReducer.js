@@ -6,7 +6,7 @@ const defaultState = {
 
 // GET ACCOUNT, EDIT ACCOUNT, DELETE ACCOUNT, <- NEED TOKEN FOR INFORMATION
 // REGISTER ACCOUNT, LOGIN ACCOUNT, LOGOUT ACCOUNT <- HANDLE TOKEN
-// LOGIN FAIL
+// LOGIN FAIL <- SEND ERROR
 
 export default function (state = defaultState, action) {
     switch(action.type){
@@ -16,6 +16,7 @@ export default function (state = defaultState, action) {
                 accounts: action.payload
             }
         case("GET_ACCOUNT"): // Return account information
+        case("EDIT_ACCOUNT"):
             return {
                 ...state,
                 profile: action.payload
@@ -27,12 +28,12 @@ export default function (state = defaultState, action) {
                 isAuthenticated: true
             }
         case("LOGOUT_SUCCESS"):
+        case("DELETE_ACCOUNT"):
             return {
                 ...state,
                 isAuthenticated: false
             }
         default:
-            console.log(`TOKEN: ${localStorage.getItem('token')}`)
             return state;
     }
 }

@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {getAccount} from '../actions/accountActions';
+import {getAccount, deleteAccount} from '../actions/accountActions';
+
+import EditAccount from './EditAccount';
 
 class Profile extends React.Component {
 
@@ -15,6 +17,8 @@ class Profile extends React.Component {
             <div>
                 <h1>{profile.username}</h1>
                 <h1>{profile.email}</h1>
+                <button onClick={this.props.deleteAccount}>DELETE ACCOUNT</button>
+                <EditAccount />
             </div>
         )
     }
@@ -26,5 +30,5 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {getAccount})(Profile)
+export default connect(mapStateToProps, {getAccount, deleteAccount})(Profile)
 

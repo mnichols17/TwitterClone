@@ -69,11 +69,15 @@ router.post("/", (req, res) => {
 // PUT: Edits a user account (using token)
 router.put("/", auth, (req, res) => {
     // Test for multiple input changes & check if fields exist
-    Account.updateOne({_id: req.user.id}, {$set: {username: req.body.username}})
-    .then(response => {
-        if(response.n === 0) return res.status(400).json({Error: "Account doesn't exist"}) // Probaby able to delete this one
-        else if (response.nModified === 0) return res.status(400).json({Error: "Nothing was changed on the account"})
-        res.json({msg: "Account modified"})
+    Account.findOne({username: req.body.username})
+    .then(account => {
+        if(account) return res.status(400).json({Error: "An account with that username already exists"})
+        Account.updateOne({_id: req.user.id}, {$set: {username: req.body.username}})
+        .then(response => {
+            if(response.n === 0) return res.status(400).json({Error: "Account doesn't exist"}) // Probaby able to delete this one
+            else if (response.nModified === 0) return res.status(400).json({Error: "Nothing was changed on the account"})
+            res.json({msg: "Account modified"})
+        })
     })
 })
 
