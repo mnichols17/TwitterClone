@@ -25,11 +25,11 @@ function Register(props) {
             <input type="text" id="password" onChange={e => {setPassword(e.target.value)}} value={newPassword} />
             <br/>
             {/* add a check for password */}
-            <label htmlFor="name">Name:</label>
-            <input type="text" id="name" onChange={e => {setEmail(e.target.value)}} value={newEmail} />
+            <label htmlFor="email">Name:</label>
+            <input type="text" id="name" onChange={e => {setName(e.target.value)}} value={newName} />
             <br/>
             <label htmlFor="email">Email:</label>
-            <input type="email" id="email" onChange={e => {setName(e.target.value)}} value={newName} />
+            <input type="email" id="email" onChange={e => {setEmail(e.target.value)}} value={newEmail} />
             <br/>
             <input type="submit" value="Submit" />
         </form>

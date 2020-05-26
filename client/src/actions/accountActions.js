@@ -10,48 +10,60 @@ export const getAccounts = () => dispatch => {
     })
 }
 
-export const getProfile = (token) => dispatch => {
+export const getAccount = () => dispatch => {
     // Get token from local storage instead at some point
+    const token = localStorage.getItem('token');
     axios({
         method: "GET",
         url: "/api/accounts",
         headers: {"x-auth-token": token}
     })
     .then(res => {
-        console.log(res)
         dispatch({
-            type: "GET_PROFILE",
+            type: "GET_ACCOUNT",
             payload: res.data
         })
+    })
+    .catch(err => {
+        // TOKEN INVALID
+        console.log(err.response.data.Error)
     })
 }
  
 export const loginAccount = (user, password) => dispatch => {
     axios.post('/api/auth', {user, password})
     .then(res => {
-        console.log(res.data);
+        console.log(res.data.token)
+        localStorage.setItem('token', res.data.token);
         dispatch({
             type: "LOGIN_SUCCESS",
             payload: res.data
         })
     })
     .catch(err => {
-        // CATCH ERROR
+        // IF PASSWORD INCORRECT or ACCOUNT DOESN'T EXIST
         console.log(err.response.data.Error)
+    })
+}
+
+export const logoutAccount = (user, password) => dispatch => {
+    localStorage.removeItem('token');
+    dispatch({
+        type: "LOGOUT_SUCCESS"
     })
 }
 
 export const registerAccount = (username, password, email, name) => dispatch => {
     axios.post('/api/accounts', {username, password, email, name})
     .then(res => {
-        console.log(res.data)
+        localStorage.setItem('token', res.data.token); // Right now returns token and data, might be good for future (not having to call GET ACCOUNT everytime) but for now token is what I want
         dispatch({
             type: "REGISTER_ACCOUNT",
             payload: res.data
         })
     })
     .catch(err => {
-        // CATCH ERROR
+        // ACCOUNT ALREADY EXISTS
         console.log(err.response.data.Error)
     })
 }

@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {getProfile} from '../actions/accountActions';
+import {getAccount} from '../actions/accountActions';
 
 class Profile extends React.Component {
 
     componentDidMount = () => {
-        this.props.getProfile(this.props.token)
+        this.props.getAccount()
     }
 
     render() {
@@ -22,10 +22,9 @@ class Profile extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        token: state.accounts.token,
         profile: state.accounts.profile 
     }
 }
 
-export default connect(mapStateToProps, {getProfile})(Profile)
+export default connect(mapStateToProps, {getAccount})(Profile)
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {getAccounts} from '../actions/accountActions';
+import {logoutAccount} from '../actions/accountActions';
 
 import Home from './Home';
 import Register from './Register';
@@ -22,7 +22,6 @@ const Routes = () => {
     return (
         <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/accounts" component={AccountList} />
             <Redirect to="/" />
@@ -36,7 +35,7 @@ class App extends React.Component {
     render() {
         return(
             <Router>
-                <Link to="/">HOME</Link>
+                {this.props.isAuthenticated ? <button onClick={this.props.logoutAccount}>LOGOUT</button> : <Link to="/">HOME</Link>}
                 {this.props.isAuthenticated ? authRoutes() : Routes()}
             </Router>
         )
@@ -49,4 +48,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, {logoutAccount})(App);
