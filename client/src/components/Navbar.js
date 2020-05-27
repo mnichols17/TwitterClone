@@ -14,7 +14,7 @@ function Navbar(props) {
                 <Link to="/profile">{props.profile.username}</Link> 
                 <button onClick={() => setTweeting(!isTweeting)}>TWEET</button>
             </div>
-            {isTweeting ? <SendTweet /> : null}
+            {isTweeting ? <SendTweet setTweeting={setTweeting}/> : null}
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const getAllTweets = () => dispatch => {  // Change this to get other profiles (not the user)
+export const getAllTweets = () => dispatch => { 
     axios({
         method: "GET",
         url: "/api/tweets"
@@ -12,6 +12,25 @@ export const getAllTweets = () => dispatch => {  // Change this to get other pro
         })
     })
     .catch(err => {
-        
+        console.log(err)
+    })
+}
+
+export const createTweet = (body) => dispatch => { 
+    const token = localStorage.getItem('token');
+    axios({
+        method: "POST",
+        url: "/api/tweets",
+        data: {body},
+        headers: {"x-auth-token": token}
+    })
+    .then(res => {
+        dispatch(getAllTweets()) 
+        dispatch({
+            type: "CREATE_TWEETS",
+        })
+    })
+    .catch(err => {
+        console.log(err)
     })
 }
