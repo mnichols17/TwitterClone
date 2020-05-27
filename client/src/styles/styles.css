@@ -5,6 +5,10 @@ body {
     margin: 0%;
 }
 
+*:focus {
+    outline: none;
+}
+
 /* Home & Login */
 
 #home {
@@ -166,6 +170,75 @@ body {
 
 #navbar button:focus {
     outline: none;
+}
+
+/* Profile */
+
+#profile {
+    background:	#6ebbeb;
+    margin: 4%;
+    padding: 4%;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    color: #213c5e;
+}
+
+#profile h1 {
+    margin-bottom: 0%;
+}
+
+#profile > div {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 5%;
+}
+
+#profile > div > button {
+    background: #213c5e;
+    padding: 5%;
+    width: 130px;
+    border-radius: 12px;
+    border: 0px;
+    color: #6ebbeb;
+    font-size: 1em;
+}
+
+#deleteAccount {
+    margin: 5% 25% 2% 25%;
+    padding: 2%;
+    border-radius: 8px;
+    border: 2px solid black;
+    font-size: .8em;
+    background: #F73939;
+}
+
+/* Edit Account */
+
+#editAccount {
+    display: flex;
+    flex-direction: column;
+}
+
+#editAccount label {
+    margin: 1%;
+}
+
+#editAccount input {
+    font-size: 1em;
+    padding: 2%;
+    border-radius: 6px;
+    border: none;
+}
+
+#editAccount button {
+    background: #213c5e;
+    padding: 4%;
+    border-radius: 12px;
+    border: 0px;
+    color: #6ebbeb;
+    font-size: 1em;
+    margin: 0% 25%;
 }
 
 /* Tweet */

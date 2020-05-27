@@ -19,11 +19,11 @@ function EditAccount(props) {
     }
 
     return(
-        <form onSubmit={onSubmit}>
+        <form id="editAccount" onSubmit={onSubmit}>
             <label htmlFor="username">Username:</label>
             <input type="text" id="user" onChange={e => {setUsername(e.target.value)}} value={username}/>
             <br/>
-            <input type="submit" value="Submit" />
+            <button type="submit">Submit Change</button>
         </form>
     )
 }

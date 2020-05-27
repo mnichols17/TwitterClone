@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {logoutAccount, deleteAccount} from '../actions/accountActions';
 
@@ -6,15 +6,27 @@ import EditAccount from './EditAccount';
 
 class Profile extends React.Component {
 
+    //const [editAccount, toggleEdit] = useState(false);
+    state = {
+        edit: false
+    }
+
+    deleteAccount = () => {
+        console.log("delete")
+        // this.props.deleteAccount
+    }
+
     render() {
         const {profile} = this.props
         return(
-            <div>
+            <div id="profile">
                 <h1>@{profile.username}</h1>
-                <h1>Name: {profile.name}</h1>
-                <button style={{background: "Red"}} onClick={this.props.deleteAccount}>DELETE ACCOUNT</button>
-                <EditAccount />
-                <button style={{color: "red"}} onClick={this.props.logoutAccount}>LOGOUT</button> 
+                <h2>{profile.name}</h2>
+                <div>
+                    <button onClick={() => this.setState({edit: !this.state.edit})}>Edit Account</button>
+                    <button onClick={this.props.logoutAccount}>Logout</button>
+                </div> 
+                {this.state.edit ? <EditAccount /> : <button id="deleteAccount" onClick={this.deleteAccount}>DELETE ACCOUNT</button>}
             </div>
         )
     }
