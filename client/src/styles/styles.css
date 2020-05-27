@@ -12,15 +12,15 @@ body {
 }
 
 #home h1 {
-    font-size: 3em;
+    font-size: 3.2em;
     color: 	#6ebbeb;
 }
 
 #home a {
     background: #6ebbeb;
     border-radius: 12px;
-    padding: 2.5%;
-    font-size: 1.1em;
+    padding: 4%;
+    font-size: 1.17em;
     color: #213c5e;
     text-decoration: none;
 }
@@ -34,31 +34,48 @@ body {
     flex-direction: column;
     align-items: center;
     color: #6ebbeb;
-    padding: 10%;
-    width: 50%;
 }
 
 #login div {
-    margin-bottom: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 300px;
+}
+
+#login label {
+    margin-left: 2%;
+    margin-bottom: 1%; 
+    font-size: 1.1em;
 }
 
 #login input {
-    margin-top: 2%;
-    font-size: 1.17em;
+    margin-bottom: 4%;
+    width: 268px;
+    padding: 4%;
+    border-radius: 12px;
+    font-size: 1.25em;
+    border: 4px solid #213c5e;
 }
 
-#login input[type=submit] {
-    margin-top: 15%;
+#login input:focus {
+    outline: none;
+    border: 4px solid #6ebbeb;
+}
+
+#login button {
     background: #6ebbeb;
+    font-size: 1.17em;
     border: 0px;
     border-radius: 12px;
-    width: 75%;
-    padding: 5%;
+    width: 45%;
+    padding: 4%;
     color: #213c5e;
-    text-decoration: none;
+    margin-top: 5%;
+    margin-bottom: 15%;
 }
 
-#login input[type=submit]:hover {
+#login button:hover {
     background: #0e98da;
     cursor: pointer;
 }
@@ -68,8 +85,48 @@ body {
 #register {
     display: flex;
     flex-direction: column;
-    align-items: center;
     color: #6ebbeb;
-    padding: 10%;
-    width: 50%;
+    padding: 4%;
+    max-width: 100%;
+}
+
+#register div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5%;
+}
+
+#register > div > label {
+    text-transform: uppercase;
+    flex: 1 1 10px;
+}
+
+#register > div > input {
+    width: 210px;
+    padding: 1%;
+    font-size: 1em;
+    border: 2px solid #213c5e;
+    border-radius: 6px;
+} 
+
+#register > div > input:focus {
+    outline: none;
+    border: 2px solid #6ebbeb;
+}
+
+#register button {
+    margin-top: 8%;
+    background: #6ebbeb;
+    border: 0px;
+    border-radius: 12px;
+    padding: 2%;
+    font-size: 1.4em;
+    color: #213c5e;
+    text-decoration: none;
+}
+
+#register button:hover {
+    background: #0e98da;
+    cursor: pointer;
 }

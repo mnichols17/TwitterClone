@@ -34,7 +34,7 @@ class App extends React.Component {
     render() {
         return(
             <Router>
-                <Navbar logoutAccount={this.props.logoutAccount} isAuthenticated={this.props.isAuthenticated} />
+                {this.props.isAuthenticated === true ? <Navbar logoutAccount={this.props.logoutAccount} /> : null}
                 {this.props.isAuthenticated ? authRoutes() : Routes()}
             </Router>
         )

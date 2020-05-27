@@ -7,12 +7,7 @@ function Navbar(props) {
     const location = useLocation().pathname
     
     return(
-        props.isAuthenticated ? 
-            <button onClick={props.logoutAccount}>LOGOUT</button> 
-            : 
-            <nav>
-                <Link style={{visibility: location === "/" ? "hidden" : "visible" }} to="/">HOME</Link>
-            </nav>
+        <button onClick={props.logoutAccount}>LOGOUT</button> 
     )
 }
 

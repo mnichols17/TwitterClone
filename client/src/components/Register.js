@@ -11,13 +11,20 @@ function Register(props) {
     const [newName, setName] = useState("");
 
     const onSubmit = e => {
-        e.preventDefault();
-        props.registerAccount(newUsername, newPassword, newEmail, newName)
-        //props.history.push("/accounts")
+        if(newUsername === "" || newPassword === "" || newEmail === "" || newName === ""){
+            alert("Please enter all fields")
+            e.preventDefault();
+        } else {
+            props.registerAccount(newUsername, newPassword, newEmail, newName)
+            e.preventDefault();
+        }
     }
 
     return(
         <form id="register" onSubmit={onSubmit}>
+            <div>
+                <label><h3>Create your account</h3></label>
+            </div>
             <div>
                 <label htmlFor="username">Username:</label>
                 <input type="text" id="username" onChange={e => {setUsername(e.target.value)}} value={newUsername}/>
@@ -35,7 +42,7 @@ function Register(props) {
                 <label htmlFor="email">Email:</label>
                 <input type="email" id="email" onChange={e => {setEmail(e.target.value)}} value={newEmail} />
             </div>
-            <input type="submit" value="Submit" />
+            <button type="submit">Register</button>
         </form>
     )
 }
