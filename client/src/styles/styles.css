@@ -1,0 +1,75 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: #213c5e;
+}
+
+/* Home & Login */
+
+#home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#home h1 {
+    font-size: 3em;
+    color: 	#6ebbeb;
+}
+
+#home a {
+    background: #6ebbeb;
+    border-radius: 12px;
+    padding: 2.5%;
+    font-size: 1.1em;
+    color: #213c5e;
+    text-decoration: none;
+}
+
+#home a:hover {
+    background: #0e98da;
+}
+
+#login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #6ebbeb;
+    padding: 10%;
+    width: 50%;
+}
+
+#login div {
+    margin-bottom: 5%;
+}
+
+#login input {
+    margin-top: 2%;
+    font-size: 1.17em;
+}
+
+#login input[type=submit] {
+    margin-top: 15%;
+    background: #6ebbeb;
+    border: 0px;
+    border-radius: 12px;
+    width: 75%;
+    padding: 5%;
+    color: #213c5e;
+    text-decoration: none;
+}
+
+#login input[type=submit]:hover {
+    background: #0e98da;
+    cursor: pointer;
+}
+
+/* Register Page */
+
+#register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #6ebbeb;
+    padding: 10%;
+    width: 50%;
+}

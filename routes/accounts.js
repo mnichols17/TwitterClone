@@ -7,6 +7,8 @@ require('dotenv').config()
 const Account = require('../models/Account');
 const auth = require('../middleware/auth');
 
+// TODO: Forgot password/reset password
+
 // Route: /api/accounts
 
 // GET: Gets all accounts (Purely for testing)

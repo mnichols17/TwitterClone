@@ -4,7 +4,7 @@
 
 - Front-end uses React with Redux & Hooks for state handling
 
-- Back-end uses Express to act as an API for the client side. API interacts with a MongoDB Atlas DB
+- Back-end uses Express to act as a REST API for the client side. API interacts with a MongoDB Atlas DB
 
 - DB contains collection of user accounts (later on "tweets" will be saved as well)
 

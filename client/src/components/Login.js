@@ -22,14 +22,16 @@ function Login(props) {
     }
 
     return(
-        <form onSubmit={onSubmit}>
-            <label htmlFor="username">Username:</label>
-            <input type="text" id="user" onChange={e => {setUser(e.target.value)}} value={user}/>
-            <br/>
-            <label htmlFor="password">Password:</label>
-            <input type="text" id="password" onChange={e => {setPassword(e.target.value)}} value={password} />
-            <br/>
-            <input type="submit" value="Submit" />
+        <form id="login" onSubmit={onSubmit}>
+            <div>
+                <label htmlFor="username">Username or Email:</label><br/>
+                <input type="text" id="user" onChange={e => {setUser(e.target.value)}} value={user}/>
+            </div>
+            <div>
+                <label htmlFor="password">Password:</label><br/>
+                <input type="text" id="password" onChange={e => {setPassword(e.target.value)}} value={password} />
+            </div>
+            <input id="login-button" type="submit" value="Login" />
         </form>
     )
 }

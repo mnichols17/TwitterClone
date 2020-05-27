@@ -1,15 +1,5 @@
 import axios from 'axios';
 
-export const getAccounts = () => dispatch => {
-    axios.get('/api/accounts/all')
-    .then(res => {
-        dispatch({
-            type: "GET_ALL_ACCOUNTS",
-            payload: res.data
-        })
-    })
-}
-
 export const getAccount = () => dispatch => {
     const token = localStorage.getItem('token');
     axios({
@@ -28,7 +18,7 @@ export const getAccount = () => dispatch => {
         }
     })
     .catch(err => {
-        // TOKEN INVALID (ACCOUTNS DELETED TOKEN WILL STILL WORK WHILE VALID)
+        // TOKEN INVALID (ACCOUNTS DELETED TOKEN WILL STILL WORK WHILE VALID)
         dispatch({
             type: "ERROR",
             payload: err

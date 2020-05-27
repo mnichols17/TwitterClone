@@ -10,11 +10,6 @@ const defaultState = {
 
 export default function (state = defaultState, action) {
     switch(action.type){
-        case("GET_ALL_ACCOUNTS"): // Get rid of this eventually
-            return {
-                ...state,
-                accounts: action.payload
-            }
         case("GET_ACCOUNT"): // Return account information
         case("EDIT_ACCOUNT"):
             return {

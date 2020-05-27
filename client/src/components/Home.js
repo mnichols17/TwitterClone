@@ -6,15 +6,10 @@ import Login from './Login';
 const Home = props => {
     
     return(
-        <div>
+        <div id="home">
+            <h1>Twitter Clone</h1>
             <Login />
-            <Link to="/register">REGISTER</Link>
-            <br />
-            <br />
-            <Link to="/accounts">ACCOUNTS</Link>
-            <br />
-            <br />
-            <Link to="/login">LOGIN</Link>
+            <Link to="/register">Sign Up</Link>
         </div>
     )
 }

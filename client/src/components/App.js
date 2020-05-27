@@ -1,13 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect, Link} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {logoutAccount} from '../actions/accountActions';
 
+import '../styles/styles.css';
 import Home from './Home';
 import Register from './Register';
-import AccountList from './AccountList';
 import Profile from './Profile';
-import Login from './Login';
+import Navbar from './Navbar';
 
 const authRoutes = () => {
     return (
@@ -22,8 +22,7 @@ const Routes = () => {
     return (
         <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/register" component={Register} />
-            <Route path="/accounts" component={AccountList} />
+            <Route path="/register" component={Register} />\
             <Redirect to="/" />
         </Switch>
     )
@@ -35,7 +34,7 @@ class App extends React.Component {
     render() {
         return(
             <Router>
-                {this.props.isAuthenticated ? <button onClick={this.props.logoutAccount}>LOGOUT</button> : <Link to="/">HOME</Link>}
+                <Navbar logoutAccount={this.props.logoutAccount} isAuthenticated={this.props.isAuthenticated} />
                 {this.props.isAuthenticated ? authRoutes() : Routes()}
             </Router>
         )

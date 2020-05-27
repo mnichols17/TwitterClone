@@ -17,20 +17,24 @@ function Register(props) {
     }
 
     return(
-        <form onSubmit={onSubmit}>
-            <label htmlFor="username">Username:</label>
-            <input type="text" id="username" onChange={e => {setUsername(e.target.value)}} value={newUsername}/>
-            <br/>
-            <label htmlFor="password">Password:</label>
-            <input type="text" id="password" onChange={e => {setPassword(e.target.value)}} value={newPassword} />
-            <br/>
+        <form id="register" onSubmit={onSubmit}>
+            <div>
+                <label htmlFor="username">Username:</label>
+                <input type="text" id="username" onChange={e => {setUsername(e.target.value)}} value={newUsername}/>
+            </div>
+            <div>
+                <label htmlFor="password">Password:</label>
+                <input type="text" id="password" onChange={e => {setPassword(e.target.value)}} value={newPassword} />
+            </div>
             {/* add a check for password */}
-            <label htmlFor="email">Name:</label>
-            <input type="text" id="name" onChange={e => {setName(e.target.value)}} value={newName} />
-            <br/>
-            <label htmlFor="email">Email:</label>
-            <input type="email" id="email" onChange={e => {setEmail(e.target.value)}} value={newEmail} />
-            <br/>
+            <div>
+                <label htmlFor="email">Name:</label>
+                <input type="text" id="name" onChange={e => {setName(e.target.value)}} value={newName} />
+            </div>
+            <div>
+                <label htmlFor="email">Email:</label>
+                <input type="email" id="email" onChange={e => {setEmail(e.target.value)}} value={newEmail} />
+            </div>
             <input type="submit" value="Submit" />
         </form>
     )
