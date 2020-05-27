@@ -188,13 +188,13 @@ body {
     margin-bottom: 0%;
 }
 
-#profile > div {
+#profileButtons {
     display: flex;
     justify-content: space-evenly;
     margin: 5%;
 }
 
-#profile > div > button {
+#profileButtons button {
     background: #213c5e;
     padding: 5%;
     width: 130px;
@@ -202,6 +202,11 @@ body {
     border: 0px;
     color: #6ebbeb;
     font-size: 1em;
+}
+
+#profileTweets > h3{
+    margin: 3%;
+    color: #6ebbeb;
 }
 
 #deleteAccount {
