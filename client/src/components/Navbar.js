@@ -8,10 +8,16 @@ function Navbar(props) {
     
     return(
         <div id="navbar">  
-            <button>PROFILE</button>
-            <button onClick={props.logoutAccount}>LOGOUT</button>  
+            <Link to="/profile">{props.profile.username}</Link> 
+            <button>TWEET</button>
         </div>
     )
 }
 
-export default connect(null)(Navbar)
+const mapStateToProps = state => {
+    return {
+        profile: state.accounts.profile
+    }
+}
+
+export default connect(mapStateToProps)(Navbar)

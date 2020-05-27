@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {logoutAccount} from '../actions/accountActions';
+import {getProfile} from '../actions/accountActions';
 
 import '../styles/styles.css';
 import Home from './Home';
@@ -10,7 +10,8 @@ import Profile from './Profile';
 import Navbar from './Navbar';
 import Timeline from './Timeline';
 
-const authRoutes = () => {
+const authRoutes = ({getProfile, profile}) => {
+    if(!profile.username) getProfile();
     return (
         <Switch>
             <Route path="/" exact component={Timeline} />
@@ -36,8 +37,8 @@ class App extends React.Component {
     render() {
         return(
             <Router>
-                {this.props.isAuthenticated === true ? <Navbar logoutAccount={this.props.logoutAccount} /> : null}
-                {this.props.isAuthenticated ? authRoutes() : Routes()}
+                {this.props.isAuthenticated === true ? <Navbar /> : null}
+                {this.props.isAuthenticated ? authRoutes(this.props) : Routes()}
             </Router>
         )
     }
@@ -45,8 +46,9 @@ class App extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        isAuthenticated: state.accounts.isAuthenticated
+        isAuthenticated: state.accounts.isAuthenticated,
+        profile: state.accounts.profile
     }
 }
 
-export default connect(mapStateToProps, {logoutAccount})(App);
+export default connect(mapStateToProps, {getProfile})(App);

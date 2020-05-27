@@ -7,7 +7,7 @@ require('dotenv').config()
 const Account = require('../models/Account');
 const auth = require('../middleware/auth');
 
-// TODO: Forgot password/reset password
+// TODO: Forgot password/reset password, Refresh token for when a user doens't access the site for longer than an hour but the token is valid
 
 // Route: /api/accounts
 
@@ -59,7 +59,12 @@ router.post("/", (req, res) => {
                     jwt.sign({id: account.id}, process.env.SECRET, {expiresIn: 3600}, (err, token) => {
                         if (err) throw err;
                         res.status(201).json({
-                            token
+                            token,
+                            profile: {
+                                username: newAccount.username,
+                                name: newAccount.name,
+                                email: newAccount.email
+                            }
                         })
                     })
                 })

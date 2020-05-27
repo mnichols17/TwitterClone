@@ -1,17 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {getAccount, deleteAccount} from '../actions/accountActions';
+import {logoutAccount, deleteAccount} from '../actions/accountActions';
 
 import EditAccount from './EditAccount';
 
 class Profile extends React.Component {
 
-    componentDidMount = () => {
-        this.props.getAccount()
-    }
-
     render() {
-        console.log(this.props)
         const {profile} = this.props
         return(
             <div>
@@ -19,6 +14,7 @@ class Profile extends React.Component {
                 <h1>Name: {profile.name}</h1>
                 <button style={{background: "Red"}} onClick={this.props.deleteAccount}>DELETE ACCOUNT</button>
                 <EditAccount />
+                <button style={{color: "red"}} onClick={this.props.logoutAccount}>LOGOUT</button> 
             </div>
         )
     }
@@ -30,5 +26,5 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {getAccount, deleteAccount})(Profile)
+export default connect(mapStateToProps, {logoutAccount, deleteAccount})(Profile)
 

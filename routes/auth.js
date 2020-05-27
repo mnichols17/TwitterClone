@@ -30,7 +30,14 @@ router.post('/', (req, res) => {
             if(!match) return res.status(400).json({Error: "Incorrect password"})
             jwt.sign({id: account.id}, process.env.SECRET, {expiresIn: 3600}, (err, token) => {
                 if (err) throw err;
-                res.status(201).json({token})
+                res.status(201).json({
+                    token,
+                    profile: {
+                        username: account.username,
+                        name: account.name,
+                        email: account.email
+                    }
+                })
             })
         })
     })

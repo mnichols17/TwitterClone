@@ -1,23 +1,26 @@
 const defaultState = {
     isAuthenticated: localStorage.getItem('token') ? true : false, // true or false based on token existing
-    accounts: [], // Remove this at some point
-    profile: {} // Will be useful later
+    profile: {}
 }
-
-// GET ACCOUNT, EDIT ACCOUNT, DELETE ACCOUNT, <- NEED TOKEN FOR INFORMATION
+// GET PROFILE (user profile), EDIT ACCOUNT, DELETE ACCOUNT, <- NEED TOKEN FOR INFORMATION
+// GET ACCOUNT (other profiles) <- PROBABLY WONT NEED TOKEN
 // REGISTER ACCOUNT, LOGIN SUCCESS, LOGOUT SUCCESS <- HANDLE TOKEN
 // LOGIN FAIL, ERROR <- SEND ERROR
 
 export default function (state = defaultState, action) {
     switch(action.type){
-        case("GET_ACCOUNT"): // Return account information
+        case("GET_ACCOUNT"):
+            return {
+                ...state
+            }
+        case("GET_PROFILE"):
         case("EDIT_ACCOUNT"):
             return {
                 ...state,
                 profile: action.payload
             }
         case("REGISTER_ACCOUNT"):
-        case("LOGIN_SUCCESS"): // Return token
+        case("LOGIN_SUCCESS"):
             return {
                 ...state,
                 isAuthenticated: true

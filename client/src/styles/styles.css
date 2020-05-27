@@ -143,13 +143,40 @@ body {
     justify-content: space-between;
 }
 
+#navbar button {
+    font-size: 1em;
+    color: #6ebbeb;
+}
+
+#navbar a {
+    font-size: 1em;
+    color: #6ebbeb;
+    text-decoration: none;
+}
+
+#navbar button {
+    font-size: .9em;
+    color: #213c5e;
+    padding: 2%;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    background: #6ebbeb;
+}
+
+#navbar button:focus {
+    outline: none;
+}
+
 /* Tweet */
 
 #tweet {
     display: flex;
     flex-direction: column;
-    border: 2px solid #0e98da;
-    margin: 4%;
+    border-bottom: 2px solid #0e98da;
+    margin: 3%;
+    padding: 3%;
+    color: white;
 }
 
 .tweet-user > h3 {
