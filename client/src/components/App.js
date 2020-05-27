@@ -8,11 +8,13 @@ import Home from './Home';
 import Register from './Register';
 import Profile from './Profile';
 import Navbar from './Navbar';
+import Timeline from './Timeline';
 
 const authRoutes = () => {
     return (
         <Switch>
-            <Route path="/" exact component={Profile} />
+            <Route path="/" exact component={Timeline} />
+            <Route path="/profile" component={Profile} />
             <Redirect to="/" />
         </Switch>
     )

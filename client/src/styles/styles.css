@@ -1,6 +1,8 @@
 body {
     font-family: 'Open Sans', sans-serif;
     background: #213c5e;
+    padding: 0%;
+    margin: 0%;
 }
 
 /* Home & Login */
@@ -129,4 +131,41 @@ body {
 #register button:hover {
     background: #0e98da;
     cursor: pointer;
+}
+
+/* Navbar */
+
+#navbar {
+    border-bottom: 2px solid #0e98da;
+    padding: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Tweet */
+
+#tweet {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #0e98da;
+    margin: 4%;
+}
+
+.tweet-user > h3 {
+    color: pink;
+    margin: 0% 0% 0% 2%;
+}
+
+.tweet-body {
+    margin: 2%;
+}
+
+.tweet-body > p {
+    margin: 0%;
+}
+
+.tweet-date > p {
+    font-size: .75em;
+    margin: 2%;
 }

@@ -4,10 +4,13 @@ import {connect} from 'react-redux';
 
 function Navbar(props) {
 
-    const location = useLocation().pathname
+    const location = useLocation().pathname //probably won't need this
     
     return(
-        <button onClick={props.logoutAccount}>LOGOUT</button> 
+        <div id="navbar">  
+            <button>PROFILE</button>
+            <button onClick={props.logoutAccount}>LOGOUT</button>  
+        </div>
     )
 }
 
