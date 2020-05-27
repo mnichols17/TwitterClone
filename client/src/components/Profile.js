@@ -6,7 +6,6 @@ import EditAccount from './EditAccount';
 
 class Profile extends React.Component {
 
-    //const [editAccount, toggleEdit] = useState(false);
     state = {
         edit: false
     }
