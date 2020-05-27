@@ -3,16 +3,18 @@ import {connect} from 'react-redux';
 
 function Tweet(props) {
 
+    const {_id, username, body, date} = props.tweet
+
     return(
-        <div id="tweet">
+        <div key={_id} id="tweet">
             <div className="tweet-user">
-                <h3>@user</h3>
+                <h3>@{username}</h3>
             </div>
             <div className="tweet-body">
-                <p>That's the tweet</p>
+                <p>{body}</p>
             </div>
             <div className="tweet-date">
-                <p>May 27th 2020</p>
+                <p>{date}</p>
             </div>
         </div>
     )

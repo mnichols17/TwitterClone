@@ -11,14 +11,6 @@ const auth = require('../middleware/auth');
 
 // Route: /api/accounts
 
-// GET: Gets all accounts (Purely for testing)
-router.get("/all", (req, res) => {
-    Account.find()
-    .sort({date: -1})
-    .select("-password -__v")
-    .then(accounts => res.json(accounts))
-})
-
 // GET: Gets account information (using token)
 router.get("/", auth, (req, res) => {
     Account.findById(req.user.id)
@@ -73,7 +65,7 @@ router.post("/", (req, res) => {
     })
 })
 
-// PUT: Edits a user account (using token)
+// PUT: Edits a user account (using token) // probably can change to findbyID
 router.put("/", auth, (req, res) => {
     // Test for multiple input changes & check if fields exist
     Account.findOne({username: req.body.username})
