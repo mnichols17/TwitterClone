@@ -3,6 +3,7 @@ import {useLocation, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import SendTweet from './SendTweet';
+import Logo from '../media/logo.png';
 
 function Navbar(props) {
 
@@ -12,7 +13,8 @@ function Navbar(props) {
         <div>
             <div id="navbar">  
                 <Link to="/profile">@{props.profile.username}</Link> 
-                <button onClick={() => setTweeting(!isTweeting)}>TWEET</button>
+                <Link to="/"><img src={Logo} /></Link>
+                <button onClick={() => setTweeting(!isTweeting)}>{isTweeting ? "HIDE" : "TWEET"}</button>
             </div>
             {isTweeting ? <SendTweet setTweeting={setTweeting}/> : null}
         </div>

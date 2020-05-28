@@ -20,7 +20,7 @@ function SendTweet(props) {
             <textarea maxLength="140" onChange={e => {setBody(e.target.value)}} value={tweetBody}></textarea>
             <div>
                 <p>{tweetBody.length}/140</p>
-                <button type="submit">Send Tweet</button>
+                <button type="submit">Send</button>
             </div>
         </form>
     )

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {logoutAccount, deleteAccount} from '../actions/accountActions';
+import {getAllTweets} from '../actions/tweetActions';
 
 import EditAccount from './EditAccount';
 import Tweet from './Tweet';
@@ -11,6 +12,10 @@ class Profile extends React.Component {
         edit: false
     }
 
+    componentDidMount = () => {
+        this.props.getAllTweets();
+    }
+
     deleteAccount = () => {
         console.log("delete")
         // this.props.deleteAccount
@@ -18,6 +23,7 @@ class Profile extends React.Component {
 
     render() {
         const {profile} = this.props
+        console.log(this.props.tweets)
         return(
             <div>
                 <div id="profile">
@@ -47,5 +53,5 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {logoutAccount, deleteAccount})(Profile)
+export default connect(mapStateToProps, {logoutAccount, deleteAccount, getAllTweets})(Profile)
 
