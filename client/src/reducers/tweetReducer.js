@@ -5,8 +5,7 @@ const defaultState = {
 
 export default function (state = defaultState, action) {
     switch(action.type){
-        case("GET_ALL_TWEETS"):
-            console.log(action.payload)
+        case("GET_TWEETS"):
             return {
                 tweets: action.payload
             }

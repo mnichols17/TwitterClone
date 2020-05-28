@@ -1,8 +1,8 @@
 import axios from 'axios';
+import { deleteAccountTweets } from './tweetActions';
 
 export const getAccount = () => dispatch => {  // Change this to get other profiles (not the user)
     const token = localStorage.getItem('token');
-    console.log("HITTING GETACCOUNT")
     axios({
         method: "GET",
         url: "/api/accounts",
@@ -31,7 +31,6 @@ export const getAccount = () => dispatch => {  // Change this to get other profi
 
 export const getProfile = () => dispatch => {
     const token = localStorage.getItem('token');
-    console.log("HITTING GET_PROFILE")
     axios({
         method: "GET",
         url: "/api/accounts",
@@ -91,6 +90,7 @@ export const deleteAccount = () => dispatch => {
         headers: {"x-auth-token": token}
     })
     .then(res => {
+        dispatch(deleteAccountTweets(token));
         localStorage.removeItem('token');
         dispatch({
             type: "DELETE_ACCOUNT"
@@ -105,8 +105,6 @@ export const deleteAccount = () => dispatch => {
         })
     })
 }
-
-
  
 export const loginAccount = (user, password) => dispatch => {
     axios.post('/api/auth', {user, password})

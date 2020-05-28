@@ -7,7 +7,7 @@ export const getAllTweets = () => dispatch => {
     })
     .then(res => { 
         dispatch({
-            type: "GET_ALL_TWEETS",
+            type: "GET_TWEETS",
             payload: res.data
         })
     })
@@ -25,10 +25,37 @@ export const createTweet = (body) => dispatch => {
         headers: {"x-auth-token": token}
     })
     .then(res => {
-        dispatch(getAllTweets()) 
-        dispatch({
-            type: "CREATE_TWEETS",
-        })
+        dispatch(getAllTweets())
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
+export const deleteTweet = (id) => dispatch => {
+    const token = localStorage.getItem('token');
+    axios({
+        method: "DELETE",
+        url: "/api/tweets",
+        data: {tweetId: id},
+        headers: {"x-auth-token": token}
+    })
+    .then(res => {
+        dispatch(getAllTweets());
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
+export const deleteAccountTweets = (token) => dispatch => {
+    axios({
+        method: "DELETE",
+        url: "/api/tweets/all",
+        headers: {"x-auth-token": token}
+    })
+    .then(res => {
+        dispatch(getAllTweets());
     })
     .catch(err => {
         console.log(err)

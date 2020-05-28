@@ -158,6 +158,11 @@ body {
     text-decoration: none;
 }
 
+#navbar #profile-link {
+    width: 65px;
+    max-width: 65px;
+}
+
 #navbar button {
     font-size: .9em;
     color: #213c5e;
@@ -318,7 +323,17 @@ body {
     margin: 0%;
 }
 
-.tweet-date > p {
+.tweet-date-delete {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tweet-date-delete img {
+    max-width: 15px;
+}
+
+.tweet-date-delete > p {
     font-size: .7em;
     margin: 2%;
 }

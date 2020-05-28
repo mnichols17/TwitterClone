@@ -17,13 +17,6 @@ router.get("/", (req, res) => {
     .then(tweets => res.json(tweets))
 })
 
-// GET: Gets all tweets for an individual account
-router.get("/:username", auth, (req, res) => {
-    res.send({
-        user: req.user
-    })
-})
-
 // POST: Creates a tweet
 router.post('/', auth, (req, res) => {
     const {body} = req.body
@@ -46,9 +39,18 @@ router.post('/', auth, (req, res) => {
 })
 
 // Delete: Deletes a tweet (must be the creator of the tweet)
-router.post('/', auth, (req, res) => {
-    res.send({
-        user: req.user.username
+router.delete('/', auth, (req, res) => {
+    const {tweetId} = req.body
+
+    Account.findById(req.user.id)
+    .then(account => {
+        Tweet.findById(tweetId)
+        .then(tweet => {
+            if (tweet.username !== account.username) return res.status(400).json({Error: "You are not authorized to delete this tweet"})
+
+            Tweet.deleteOne({_id: tweetId})
+            .then(response => res.json({msg: "Tweet Deleted"}))
+        })
     })
 })
 

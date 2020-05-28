@@ -17,8 +17,7 @@ class Profile extends React.Component {
     }
 
     deleteAccount = () => {
-        console.log("delete")
-        // this.props.deleteAccount
+        if (window.confirm("Are you sure you want to delete your account?")) this.props.deleteAccount()
     }
 
     render() {
