@@ -15,7 +15,7 @@ const authRoutes = ({getProfile, profile}) => {
     return (
         <Switch>
             <Route path="/" exact component={Timeline} />
-            <Route path="/profile" component={Profile} />
+            <Route path="/profile/:username" component={Profile} />
             <Redirect to="/" />
         </Switch>
     )

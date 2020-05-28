@@ -19,6 +19,13 @@ router.get("/", auth, (req, res) => {
     .then(account => res.json(account))
 })
 
+router.get("/:username", (req, res) => {
+    Account.findOne({username: req.params.username})
+    .select("-_id -email -password -__v")
+    .then(account => res.json(account))
+    .catch(err => res.status(400).json(err))
+})
+
 // POST: Creates an account and assigns token
 router.post("/", (req, res) => {
     const {username, password, email, name} = req.body

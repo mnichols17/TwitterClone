@@ -1,32 +1,30 @@
 import axios from 'axios';
-import { deleteAccountTweets } from './tweetActions';
 
-export const getAccount = () => dispatch => {  // Change this to get other profiles (not the user)
-    const token = localStorage.getItem('token');
-    axios({
-        method: "GET",
-        url: "/api/accounts",
-        headers: {"x-auth-token": token}
-    })
-    .then(res => { // Right now returns token and data, might be good for future (not having to call GET ACCOUNT everytime) but for now token is what I want
-        if(res.data === null){ // FOR ACCOUNTS THAT HAVE BEEN DELETED BUT STILL MAKE IT THROUGH. NEED TO FIX LATER
-            console.log(res.data)
-            dispatch(logoutAccount());
-        } else {
-            dispatch({
-                type: "GET_ACCOUNT",
-                payload: res.data
-            })
-        }
-    })
-    .catch(err => {
-        // TOKEN INVALID (ACCOUNTS DELETED TOKEN WILL STILL WORK WHILE VALID)
-        dispatch({
-            type: "ERROR",
-            payload: err
-        })
-        //console.log(err.response.data.Error)
-    })
+export const getAccountInfo = (username) => dispatch => {
+    console.log(username)
+    // axios({
+    //     method: "GET",
+    //     url: `/api/accounts/${username}`
+    // })
+    // .then(res => { 
+    //     if(res.data === null){
+    //         console.log(res.data)
+    //         dispatch(logoutAccount());
+    //     } else {
+    //         dispatch({
+    //             type: "GET_ACCOUNT",
+    //             payload: res.data
+    //         })
+    //     }
+    // })
+    // .catch(err => {
+    //     // TOKEN INVALID (ACCOUNTS DELETED TOKEN WILL STILL WORK WHILE VALID)
+    //     dispatch({
+    //         type: "ERROR",
+    //         payload: err
+    //     })
+    //     //console.log(err.response.data.Error)
+    // })
 }
 
 export const getProfile = () => dispatch => {
@@ -90,7 +88,6 @@ export const deleteAccount = () => dispatch => {
         headers: {"x-auth-token": token}
     })
     .then(res => {
-        dispatch(deleteAccountTweets(token));
         localStorage.removeItem('token');
         dispatch({
             type: "DELETE_ACCOUNT"

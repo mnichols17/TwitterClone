@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 import {deleteTweet} from '../actions/tweetActions';
 import Delete from '../media/delete.png';
@@ -22,7 +23,7 @@ function Tweet(props) {
     return(
         <div key={_id} id="tweet">
             <div className="tweet-user">
-                <h3>@{username}</h3>
+                <h3><Link to={`/profile/${username}`}>@{username}</Link></h3>
             </div>
             <div className="tweet-body">
                 <p>{body}</p>

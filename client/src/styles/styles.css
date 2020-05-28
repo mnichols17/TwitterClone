@@ -206,6 +206,7 @@ body {
 
 #profileButtons button {
     background: #213c5e;
+    margin: 0% 2%;
     padding: 5%;
     width: 130px;
     border-radius: 12px;
@@ -311,8 +312,13 @@ body {
 }
 
 .tweet-user > h3 {
-    color: #6ebbeb;
     margin: 0% 0% 0% 2%;
+}
+
+.tweet-user a, .tweet-user a:visited {
+    color: #6ebbeb;
+    text-decoration: none;
+
 }
 
 .tweet-body {

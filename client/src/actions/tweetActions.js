@@ -47,17 +47,3 @@ export const deleteTweet = (id) => dispatch => {
         console.log(err)
     })
 }
-
-export const deleteAccountTweets = (token) => dispatch => {
-    axios({
-        method: "DELETE",
-        url: "/api/tweets/all",
-        headers: {"x-auth-token": token}
-    })
-    .then(res => {
-        dispatch(getAllTweets());
-    })
-    .catch(err => {
-        console.log(err)
-    })
-}

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
+import axios from 'axios';
 import {connect} from 'react-redux';
-import {logoutAccount, deleteAccount} from '../actions/accountActions';
+import {getAccountInfo, logoutAccount, deleteAccount} from '../actions/accountActions';
 import {getAllTweets} from '../actions/tweetActions';
 
 import EditAccount from './EditAccount';
@@ -9,11 +10,19 @@ import Tweet from './Tweet';
 class Profile extends React.Component {
 
     state = {
-        edit: false
+        edit: false,
+        profile: {}
     }
 
-    componentDidMount = () => {
+    componentDidMount = async() => {
         this.props.getAllTweets();
+        if (this.props.profile.username !== this.props.match.params.username) {
+            axios.get(`/api/accounts/${this.props.match.params.username}`)
+            .then(res => {
+                if(res.data === null) console.log("NULL")
+                this.setState({profile: res.data})
+            })
+        } else this.setState({profile: this.props.profile})
     }
 
     deleteAccount = () => {
@@ -21,18 +30,17 @@ class Profile extends React.Component {
     }
 
     render() {
-        const {profile} = this.props
-        console.log(this.props.tweets)
+        const profile = this.state.profile;
         return(
             <div>
                 <div id="profile">
                     <h1>@{profile.username}</h1>
                     <h2>{profile.name}</h2>
-                    <div id="profileButtons">
+                    <div style={{display: this.props.profile.username !== profile.username ? "none" : null}} id="profileButtons">
                         <button onClick={() => this.setState({edit: !this.state.edit})}>Edit Account</button>
                         <button onClick={this.props.logoutAccount}>Logout</button>
                     </div> 
-                    {this.state.edit ? <EditAccount /> : <button id="deleteAccount" onClick={this.deleteAccount}>DELETE ACCOUNT</button>}
+                    { this.state.edit ? <EditAccount /> : <button id="deleteAccount" style={{display: this.props.profile.username !== profile.username ? "none" : null}} onClick={this.deleteAccount}>DELETE ACCOUNT</button> }
                 </div>
                 <div id="profileTweets">
                     <h3>@{profile.username}'s Tweets:</h3>
@@ -52,5 +60,5 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {logoutAccount, deleteAccount, getAllTweets})(Profile)
+export default connect(mapStateToProps, {getAccountInfo, logoutAccount, deleteAccount, getAllTweets})(Profile)
 
