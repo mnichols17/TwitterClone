@@ -32,6 +32,24 @@ export const createTweet = (body) => dispatch => {
     })
 }
 
+export const editFavorties = (tweetId, add) => dispatch => {
+    const token = localStorage.getItem('token');
+    // if 1 add to Db, if -1 remove from db
+    axios({
+        method: "PUT",
+        url: "/api/tweets/favorite",
+        data: {tweetId, add},
+        headers: {"x-auth-token": token}
+    })
+    .then(res => {
+        console.log(res)
+        dispatch(getAllTweets())
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
 export const deleteTweet = (id) => dispatch => {
     const token = localStorage.getItem('token');
     axios({

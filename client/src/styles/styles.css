@@ -335,6 +335,19 @@ body {
     justify-content: space-between;
 }
 
+#tweet-favorites {
+    display: flex;
+    align-items: center;
+}
+
+#tweet-favorites img {
+    max-width: 18px;
+}
+
+#tweet-favorites p, #tweet-favorites img {
+    margin: 0% 20%;
+}
+
 .tweet-date-delete img {
     max-width: 15px;
 }

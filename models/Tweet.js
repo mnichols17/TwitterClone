@@ -14,6 +14,10 @@ const TweetSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
+    },
+    favorites: {
+        type: Number,
+        default: 0
     }
 })
 
