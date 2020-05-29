@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {getAccountInfo, logoutAccount, deleteAccount} from '../actions/accountActions';
+import {logoutAccount, deleteAccount} from '../actions/accountActions';
 import {getAllTweets} from '../actions/tweetActions';
 
 import EditAccount from './EditAccount';
@@ -60,5 +60,5 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {getAccountInfo, logoutAccount, deleteAccount, getAllTweets})(Profile)
+export default connect(mapStateToProps, {logoutAccount, deleteAccount, getAllTweets})(Profile)
 

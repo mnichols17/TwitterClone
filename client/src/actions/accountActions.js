@@ -1,32 +1,5 @@
 import axios from 'axios';
 
-export const getAccountInfo = (username) => dispatch => {
-    console.log(username)
-    // axios({
-    //     method: "GET",
-    //     url: `/api/accounts/${username}`
-    // })
-    // .then(res => { 
-    //     if(res.data === null){
-    //         console.log(res.data)
-    //         dispatch(logoutAccount());
-    //     } else {
-    //         dispatch({
-    //             type: "GET_ACCOUNT",
-    //             payload: res.data
-    //         })
-    //     }
-    // })
-    // .catch(err => {
-    //     // TOKEN INVALID (ACCOUNTS DELETED TOKEN WILL STILL WORK WHILE VALID)
-    //     dispatch({
-    //         type: "ERROR",
-    //         payload: err
-    //     })
-    //     //console.log(err.response.data.Error)
-    // })
-}
-
 export const getProfile = () => dispatch => {
     const token = localStorage.getItem('token');
     axios({
@@ -48,11 +21,11 @@ export const getProfile = () => dispatch => {
     })
     .catch(err => {
         // TOKEN INVALID (ACCOUNTS DELETED TOKEN WILL STILL WORK WHILE VALID)
+        localStorage.removeItem('token');
         dispatch({
             type: "ERROR",
             payload: err
         })
-        //console.log(err.response.data.Error)
     })
 }
 
@@ -114,8 +87,7 @@ export const loginAccount = (user, password) => dispatch => {
     })
     .catch(err => {
         // IF PASSWORD INCORRECT or ACCOUNT DOESN'T EXIST
-        console.log(err)
-        //console.log(err.response.data.Error)
+        console.log(err.response.data.Error)
         dispatch({
             type: "ERROR",
             payload: err
