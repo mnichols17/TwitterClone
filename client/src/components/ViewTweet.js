@@ -3,37 +3,35 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import {deleteTweet, editFavorties} from '../actions/tweetActions';
+import {getAllTweets, deleteTweet, editFavorties} from '../actions/tweetActions';
+import {getReplies} from '../actions/replyActions';
 import Tweet from './Tweet';
 import Reply from './Reply';
 
 class ViewTweet extends React.Component {
 
-    state = {
-        replies: []
-    }
-
     componentDidMount = () => {
-        axios.get(`/api/replies/${this.props.match.params.id}`)
-        .then(res => {
-            if(res.data === null) console.log("NULL")
-            this.setState({replies: res.data})
-        })
+        this.props.getAllTweets();
+        this.props.getReplies(this.props.match.params.id);
+    }
+    componentWillUnmount = () => {
+        this.props.getReplies();
     }
 
     render() {
-        console.log(this.state.replies)
         return(
             <div>
-                <Tweet tweet={this.props.location.state.tweet} />
-                {this.state.replies.map(reply => {
-                        return (
-                            <div id="replyLine">
-                                <div className="replyTick"><h1 style={{visibility: "hidden"}}>Reply</h1></div>
-                                <Reply key={reply._id} reply={reply} />
-                            </div>
-                        )
-                    })}
+                {this.props.tweets.map(tweet => 
+                    this.props.match.params.id === tweet._id ? <Tweet key={tweet._id} tweet={tweet} viewTweet={true} /> : null
+                )}
+                {this.props.replies.map(reply => {
+                    return (
+                        <div key={reply._id} id="replyLine">
+                            <div className="replyTick"><h1 style={{visibility: "hidden"}}>Reply</h1></div>
+                            <Reply reply={reply} />
+                        </div>
+                    )
+                })}
             </div>
         )
     }
@@ -41,8 +39,9 @@ class ViewTweet extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        tweets: state.tweets.tweets 
+        tweets: state.tweets.tweets,
+        replies: state.replies.replies 
     }
 }
 
-export default connect(null, {})(ViewTweet)
+export default connect(mapStateToProps, {getReplies, getAllTweets})(ViewTweet)

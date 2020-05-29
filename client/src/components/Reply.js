@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
+import {deleteReply} from '../actions/replyActions';
 import Favorite from '../media/favorite.png';
 import Favorited from '../media/favorited.png';
 import Delete from '../media/delete.png';
@@ -11,8 +12,8 @@ function Reply(props) {
     const [isFavorited, setFavorite] = useState(false);
 
     const {_id, username, body, date, favorites} = props.reply
-    // const profileUsername = props.profile.username,
-    //         profileFavorites = props.profile.favorites ? props.profile.favorites : [];
+    const profileUsername = props.profile.username,
+            profileFavorites = props.profile.favorites ? props.profile.favorites : [];
 
     let newDate = new Date(date),
         month = '' + (newDate.getMonth() + 1),
@@ -22,7 +23,7 @@ function Reply(props) {
     newDate = [month, day, year].join('/')
 
     const verifyDelete = id => {
-        if (window.confirm("Are you sure you want to delete this tweet?")) console.log("DELETE")
+        if (window.confirm("Are you sure you want to delete this reply?")) props.deleteReply(id)
     }
 
     const handleFavorite = (e, id) => {
@@ -47,12 +48,15 @@ function Reply(props) {
                     <img onClick={(event) => handleFavorite(event, _id)} src={isFavorited ? Favorited : Favorite} />
                     {favorites}
                 </p>
-                <img style={{visibility: "hidden"}} onClick={() => verifyDelete(_id)} src={Delete} />
+                <img style={{visibility: profileUsername === username & profileUsername !== null ? "visible" : "hidden"}} onClick={() => verifyDelete(_id)} src={Delete} />
             </div>
         </div>
     )
 }
+const mapStateToProps = state => {
+    return {
+        profile: state.accounts.profile
+    }
+}
 
-/* <img style={{visibility: profileUsername === username & profileUsername !== null ? "visible" : "hidden"}} onClick={() => verifyDelete(_id)} src={Delete} /> */
-
-export default connect(null)(Reply)
+export default connect(mapStateToProps, {deleteReply})(Reply)

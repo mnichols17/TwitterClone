@@ -2,10 +2,6 @@ const defaultState = {
     isAuthenticated: localStorage.getItem('token') ? true : false, // true or false based on token existing
     profile: {}
 }
-// GET PROFILE (user profile), EDIT ACCOUNT, DELETE ACCOUNT, <- NEED TOKEN FOR INFORMATION
-// GET ACCOUNT (other profiles) <- PROBABLY WONT NEED TOKEN
-// REGISTER ACCOUNT, LOGIN SUCCESS, LOGOUT SUCCESS <- HANDLE TOKEN
-// LOGIN FAIL, ERROR <- SEND ERROR
 
 export default function (state = defaultState, action) {
     switch(action.type){

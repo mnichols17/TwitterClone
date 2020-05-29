@@ -23,6 +23,7 @@ router.get("/:tweetId", (req, res) => {
 // POST: Creates a reply
 router.post('/', auth, (req, res) => {
     const {tweetId, body} = req.body
+    console.log(req.body)
 
     Account.findById(req.user.id)
     .select("-password -__v")
@@ -63,6 +64,7 @@ router.put('/favorite', auth, (req, res) => {
 // Delete: Deletes a reply
 router.delete('/', auth, (req, res) => {
     const {replyId} = req.body;
+    console.log(replyId)
 
     Account.findById(req.user.id)
     .then(account => {
@@ -72,13 +74,16 @@ router.delete('/', auth, (req, res) => {
 
             Reply.deleteOne({_id: replyId})
             .then(msg => console.log(msg))
-            
+
             Tweet.updateOne(
                 {_id: reply.originalTweet},
                 { $inc: {replies: -1}}
             )
             .then(response => {
-                res.json({msg: "Reply deleted"})
+                res.json({
+                    msg: "Reply deleted",
+                    replyId
+                })
             })
         })
     })

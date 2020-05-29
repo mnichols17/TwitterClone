@@ -5,7 +5,8 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config()
 
 const Account = require('../models/Account');
-const Tweet = require('../models/Tweet')
+const Tweet = require('../models/Tweet');
+const Reply = require('../models/Reply');
 const auth = require('../middleware/auth');
 
 // TODO: Forgot password/reset password, Refresh token for when a user doens't access the site for longer than an hour but the token is valid
@@ -110,6 +111,7 @@ router.put("/", auth, (req, res) => {
         Account.findById(req.user.id)
         .then(async(account) => {
             await Tweet.updateMany({username: account.username}, {$set: {username: req.body.username}})
+            await Reply.updateMany({username: account.username}, {$set: {username: req.body.username}})
             Account.updateOne({_id: req.user.id}, {$set: {username: req.body.username}})
             .then(response => {
                 if(response.n === 0) return res.status(400).json({Error: "Account doesn't exist"}) // Probaby able to delete this one
@@ -124,7 +126,9 @@ router.put("/", auth, (req, res) => {
 router.delete("/", auth, (req, res) => {
     Account.findById(req.user.id)
     .then(account => {
+        // also subtract favorties & reply count
         Tweet.deleteMany({username: account.username})
+        Reply.deleteMany({username: account.username})
         .then(response => {
             Account.deleteOne({_id: req.user.id})
             .then(response => res.json({msg: "Account Deleted"}))

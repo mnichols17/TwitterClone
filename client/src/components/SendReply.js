@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {createTweet} from '../actions/tweetActions';
+import {createReply} from '../actions/replyActions';
 
 function SendReply(props) {
 
@@ -9,9 +9,8 @@ function SendReply(props) {
     const onSubmit = e => {
         e.preventDefault();
         if(replyBody !== "") {
-            console.log(replyBody)
-            //props.createReply(tweetBody);
-            //props.setReplying(false);
+            props.createReply(props.tweetId, replyBody);
+            props.setReplying(false);
         }
         else alert("Reply body must contain at least 1 character")
     }
@@ -27,4 +26,4 @@ function SendReply(props) {
     )
 }
 
-export default connect(null, {createTweet})(SendReply)
+export default connect(null, {createReply})(SendReply)
