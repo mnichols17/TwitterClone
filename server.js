@@ -18,5 +18,6 @@ app.use(express.json());
 app.use('/api/accounts', require('./routes/accounts'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/tweets', require('./routes/tweets'));
+app.use('/api/replies', require('./routes/replies'));
 
 app.listen(port, () => console.log(`Server running on ${port}`))

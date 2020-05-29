@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// (id in DB) username associated with tweet, tweetbody, date tweeted
-const TweetSchema = new Schema({
+// (id in DB) original tweet ID that reply is towards, username associated with reply, reply body, date replied
+const ReplySchema = new Schema({
+    originalTweet: {
+        type: String,
+        required: true
+    },
     username: {
         type: String,
         required: true
@@ -18,11 +22,7 @@ const TweetSchema = new Schema({
     favorites: {
         type: Number,
         default: 0
-    },
-    replies: {
-        type: Number,
-        default: 0
     }
 })
 
-module.exports = Tweet = mongoose.model('tweet', TweetSchema);
+module.exports = Reply = mongoose.model('reply', ReplySchema);

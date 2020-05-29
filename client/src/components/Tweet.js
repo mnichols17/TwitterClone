@@ -6,12 +6,13 @@ import {deleteTweet, editFavorties} from '../actions/tweetActions';
 import Favorite from '../media/favorite.png';
 import Favorited from '../media/favorited.png';
 import Delete from '../media/delete.png';
+import Reply from '../media/reply.png';
 
 function Tweet(props) {
 
     const [isFavorited, setFavorite] = useState(false);
 
-    const {_id, username, body, date, favorites} = props.tweet
+    const {_id, username, body, date, favorites, replies} = props.tweet
     const profileUsername = props.profile.username,
             profileFavorites = props.profile.favorites ? props.profile.favorites : [];
 
@@ -30,6 +31,10 @@ function Tweet(props) {
         props.editFavorties(id, isFavorited ? -1 : 1)
     }
 
+    const handleReply = (e, id) => {
+        console.log("REPLY")
+    }
+
     useEffect(() => {
         setFavorite(profileFavorites.includes(_id));
     })
@@ -42,11 +47,15 @@ function Tweet(props) {
             <div className="tweet-body">
                 <p>{body}</p>
             </div>
-            <div className="tweet-date-delete">
+            <div className="tweet-information">
                 <p>{newDate}</p>
-                <p id="tweet-favorites">
+                <p className="tweet-details">
                     <img onClick={(event) => handleFavorite(event, _id)} src={isFavorited ? Favorited : Favorite} />
                     {favorites}
+                </p>
+                <p className="tweet-details">
+                    <img id="reply" onClick={(event) => handleReply(event, _id)} src={Reply} />
+                    {replies}
                 </p>
                 <img style={{visibility: profileUsername === username & profileUsername !== null ? "visible" : "hidden"}} onClick={() => verifyDelete(_id)} src={Delete} />
             </div>

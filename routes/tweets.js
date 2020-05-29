@@ -41,7 +41,6 @@ router.post('/', auth, (req, res) => {
 // PUT: Changes number of favorites on a tweet
 router.put('/favorite', auth, (req, res) => {
     const {tweetId, add} = req.body;
-    
     Tweet.updateOne(
         {_id: tweetId},
         { $inc: {favorites: add}}

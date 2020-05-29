@@ -329,30 +329,34 @@ body {
     margin: 0%;
 }
 
-.tweet-date-delete {
+.tweet-information {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-#tweet-favorites {
+.tweet-details {
     display: flex;
     align-items: center;
 }
 
-#tweet-favorites img {
+.tweet-details img {
     max-width: 18px;
 }
 
-#tweet-favorites p, #tweet-favorites img {
+.tweet-details #reply {
+    max-width: 19px;
+}
+
+.tweet-details p, .tweet-details img {
     margin: 0% 20%;
 }
 
-.tweet-date-delete img {
+.tweet-information img {
     max-width: 15px;
 }
 
-.tweet-date-delete > p {
+.tweet-information > p {
     font-size: .7em;
     margin: 2%;
 }
