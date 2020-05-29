@@ -62,7 +62,26 @@ router.put('/favorite', auth, (req, res) => {
 
 // Delete: Deletes a reply
 router.delete('/', auth, (req, res) => {
-    
+    const {replyId} = req.body;
+
+    Account.findById(req.user.id)
+    .then(account => {
+        Reply.findById(replyId)
+        .then(reply => {
+            if (reply.username !== account.username) return res.status(400).json({Error: "You are not authorized to delete this reply"})
+
+            Reply.deleteOne({_id: replyId})
+            .then(msg => console.log(msg))
+            
+            Tweet.updateOne(
+                {_id: reply.originalTweet},
+                { $inc: {replies: -1}}
+            )
+            .then(response => {
+                res.json({msg: "Reply deleted"})
+            })
+        })
+    })
 })
 
 module.exports = router;

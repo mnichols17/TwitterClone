@@ -307,9 +307,9 @@ body {
     color: white;
 }
 
-#tweet:last-child {
+/* #tweet:last-child {
     border-bottom: none;
-}
+} */
 
 .tweet-user > h3 {
     margin: 0% 0% 0% 2%;
@@ -323,6 +323,11 @@ body {
 
 .tweet-body {
     margin: 2%;
+}
+
+.tweet-body a {
+    text-decoration: none;
+    color: white;
 }
 
 .tweet-body > p {
@@ -359,4 +364,20 @@ body {
 .tweet-information > p {
     font-size: .7em;
     margin: 2%;
+}
+
+/* Reply Timeline */
+
+#replyLine {
+    display: flex;
+    width: 100%;
+}
+
+#replyLine > div {
+    flex-grow: 2;
+}
+
+.replyTick, .replyTick h1 {
+    border-right: 2px solid #6ebbeb;
+    max-width: 20px;
 }

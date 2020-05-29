@@ -6,11 +6,13 @@ import {deleteTweet, editFavorties} from '../actions/tweetActions';
 import Favorite from '../media/favorite.png';
 import Favorited from '../media/favorited.png';
 import Delete from '../media/delete.png';
-import Reply from '../media/reply.png';
+import ReplyIcon from '../media/reply.png';
+import SendReply from './SendReply';
 
 function Tweet(props) {
 
     const [isFavorited, setFavorite] = useState(false);
+    const [isReplying, setReplying] = useState(false);
 
     const {_id, username, body, date, favorites, replies} = props.tweet
     const profileUsername = props.profile.username,
@@ -31,10 +33,6 @@ function Tweet(props) {
         props.editFavorties(id, isFavorited ? -1 : 1)
     }
 
-    const handleReply = (e, id) => {
-        console.log("REPLY")
-    }
-
     useEffect(() => {
         setFavorite(profileFavorites.includes(_id));
     })
@@ -45,7 +43,10 @@ function Tweet(props) {
                 <h3><Link to={`/profile/${username}`}>@{username}</Link></h3>
             </div>
             <div className="tweet-body">
-                <p>{body}</p>
+                <p><Link to={{
+                    pathname: `/tweet/${_id}`,
+                    state: {tweet: props.tweet}
+                }}>{body}</Link></p>
             </div>
             <div className="tweet-information">
                 <p>{newDate}</p>
@@ -54,16 +55,15 @@ function Tweet(props) {
                     {favorites}
                 </p>
                 <p className="tweet-details">
-                    <img id="reply" onClick={(event) => handleReply(event, _id)} src={Reply} />
+                    <img id="reply" onClick={() => setReplying(!isReplying)} src={ReplyIcon} />
                     {replies}
                 </p>
                 <img style={{visibility: profileUsername === username & profileUsername !== null ? "visible" : "hidden"}} onClick={() => verifyDelete(_id)} src={Delete} />
             </div>
+            {isReplying ? <SendReply setReplying={setReplying}/> : null}
         </div>
     )
 }
-
-// src={profileFavorites.includes(_id) ? Favorited : Favorite}
 
 const mapStateToProps = state => {
     return {

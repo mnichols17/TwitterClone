@@ -9,6 +9,7 @@ import Register from './Register';
 import Profile from './Profile';
 import Navbar from './Navbar';
 import Timeline from './Timeline';
+import ViewTweet from './ViewTweet';
 
 const authRoutes = ({getProfile, profile}) => {
     if(!profile.username) getProfile();
@@ -16,6 +17,7 @@ const authRoutes = ({getProfile, profile}) => {
         <Switch>
             <Route path="/" exact component={Timeline} />
             <Route path="/profile/:username" component={Profile} />
+            <Route path="/tweet/:id" component={ViewTweet} />
             <Redirect to="/" />
         </Switch>
     )
