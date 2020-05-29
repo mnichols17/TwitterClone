@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 import {editAccount} from '../actions/accountActions';
 
 function EditAccount(props) {
@@ -9,13 +10,11 @@ function EditAccount(props) {
     const onSubmit = e => {
         if(username !== "") {
             props.editAccount(username)
+            props.history.push(`/profile/${username}`)
         } else {
             e.preventDefault();
             window.alert("Please enter information in the username field!")
         }
-        //window.confirm("TEST")
-        //props.loginAccount(user, password)
-        //props.history.push("/accounts")
     }
 
     return(

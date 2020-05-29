@@ -16,6 +16,7 @@ class Profile extends React.Component {
 
     componentDidMount = async() => {
         this.props.getAllTweets();
+        console.log(this.props.match.params.username);
         if (this.props.profile.username !== this.props.match.params.username) {
             axios.get(`/api/accounts/${this.props.match.params.username}`)
             .then(res => {
@@ -27,6 +28,7 @@ class Profile extends React.Component {
 
     deleteAccount = () => {
         if (window.confirm("Are you sure you want to delete your account?")) this.props.deleteAccount()
+        // CHECK Redux state to see if it's cleared
     }
 
     render() {
@@ -40,7 +42,7 @@ class Profile extends React.Component {
                         <button onClick={() => this.setState({edit: !this.state.edit})}>Edit Account</button>
                         <button onClick={this.props.logoutAccount}>Logout</button>
                     </div> 
-                    { this.state.edit ? <EditAccount /> : <button id="deleteAccount" style={{display: this.props.profile.username !== profile.username ? "none" : null}} onClick={this.deleteAccount}>DELETE ACCOUNT</button> }
+                    { this.state.edit ? <EditAccount history={this.props.history} /> : <button id="deleteAccount" style={{display: this.props.profile.username !== profile.username ? "none" : null}} onClick={this.deleteAccount}>DELETE ACCOUNT</button> }
                 </div>
                 <div id="profileTweets">
                     <h3>@{profile.username}'s Tweets:</h3>

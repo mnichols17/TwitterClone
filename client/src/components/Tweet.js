@@ -48,7 +48,7 @@ function Tweet(props) {
                     <img onClick={(event) => handleFavorite(event, _id)} src={isFavorited ? Favorited : Favorite} />
                     {favorites}
                 </p>
-                { profileUsername === username & profileUsername !== null ? <img onClick={() => verifyDelete(_id)} src={Delete} /> : null }
+                <img style={{visibility: profileUsername === username & profileUsername !== null ? "visible" : "hidden"}} onClick={() => verifyDelete(_id)} src={Delete} />
             </div>
         </div>
     )
