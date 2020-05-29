@@ -74,23 +74,30 @@ router.post("/", (req, res) => {
 })
 
 // PUT: Keeps track of tweets that the user favorited // might have to be auth?
-router.put("/", auth, (req, res) => {
-    // Test for multiple input changes & check if fields exist
-    Account.findOne({username: req.body.username})
-    .then(account => {
-        if(account) return res.status(400).json({Error: "An account with that username already exists"})
+router.put("/favorite", auth, (req, res) => {
+    
+    console.log(req.user.id)
 
-        Account.findById(req.user.id)
-        .then(async(account) => {
-            await Tweet.updateMany({username: account.username}, {$set: {username: req.body.username}})
-            Account.updateOne({_id: req.user.id}, {$set: {username: req.body.username}})
-            .then(response => {
-                if(response.n === 0) return res.status(400).json({Error: "Account doesn't exist"}) // Probaby able to delete this one
-                else if (response.nModified === 0) return res.status(400).json({Error: "Nothing was changed on the account"})
-                res.json({msg: "Account modified"})
-            })
+    if(req.body.add > 0){
+        Account.update(
+            {_id: req.user.id},
+            { $push: {favorites: req.body.tweetId}}
+        )
+        .then(msg => {
+            console.log(msg)
+            res.json("Tweet Added")
         })
-    })
+    } else {
+        Account.update(
+            {_id: req.user.id},
+            { $pull: {favorites: req.body.tweetId}}
+        )
+        .then(msg => {
+            console.log(msg)
+            res.json("Tweet removed")
+        })
+    }
+    
 })
 
 // PUT: Edits a user account (using token) //look into findOneAndUpdate or one of the .updates

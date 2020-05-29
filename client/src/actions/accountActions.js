@@ -120,3 +120,16 @@ export const registerAccount = (username, password, email, name) => dispatch => 
         })
     })
 }
+
+export const trackFavorites = (tweetId, add) => dispatch => {
+    const token = localStorage.getItem('token');
+    axios({
+        method: "PUT",
+        url: "/api/accounts/favorite",
+        headers: {"x-auth-token": token},
+        data: {tweetId, add}
+    })
+    .then(res => {
+        console.log(res)
+    })
+}

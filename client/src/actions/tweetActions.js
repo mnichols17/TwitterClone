@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {getProfile , trackFavorites} from './accountActions';
 
 export const getAllTweets = () => dispatch => { 
     axios({
@@ -34,7 +35,7 @@ export const createTweet = (body) => dispatch => {
 
 export const editFavorties = (tweetId, add) => dispatch => {
     const token = localStorage.getItem('token');
-    // if 1 add to Db, if -1 remove from db
+    dispatch(trackFavorites(tweetId, add));
     axios({
         method: "PUT",
         url: "/api/tweets/favorite",
@@ -43,6 +44,7 @@ export const editFavorties = (tweetId, add) => dispatch => {
     })
     .then(res => {
         console.log(res)
+        dispatch(getProfile());
         dispatch(getAllTweets())
     })
     .catch(err => {

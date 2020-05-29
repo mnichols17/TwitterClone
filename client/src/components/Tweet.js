@@ -1,14 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 import {deleteTweet, editFavorties} from '../actions/tweetActions';
 import Favorite from '../media/favorite.png';
+import Favorited from '../media/favorited.png';
 import Delete from '../media/delete.png';
 
 function Tweet(props) {
 
+    const [isFavorited, setFavorite] = useState(false);
+
     const {_id, username, body, date, favorites} = props.tweet
+    const profileUsername = props.profile.username,
+            profileFavorites = props.profile.favorites ? props.profile.favorites : [];
 
     let newDate = new Date(date),
         month = '' + (newDate.getMonth() + 1),
@@ -21,9 +26,13 @@ function Tweet(props) {
         if (window.confirm("Are you sure you want to delete this tweet?")) props.deleteTweet(id)
     }
 
-    const handleFavorite = id => {
-        props.editFavorties(id, 1)
+    const handleFavorite = (e, id) => {
+        props.editFavorties(id, isFavorited ? -1 : 1)
     }
+
+    useEffect(() => {
+        setFavorite(profileFavorites.includes(_id));
+    })
 
     return(
         <div key={_id} id="tweet">
@@ -35,16 +44,21 @@ function Tweet(props) {
             </div>
             <div className="tweet-date-delete">
                 <p>{newDate}</p>
-                <p id="tweet-favorites"><img onClick={() => handleFavorite(_id)} src={Favorite} />{favorites}</p>
-                { props.username === username & props.username !== null ? <img onClick={() => verifyDelete(_id)} src={Delete} /> : null }
+                <p id="tweet-favorites">
+                    <img onClick={(event) => handleFavorite(event, _id)} src={isFavorited ? Favorited : Favorite} />
+                    {favorites}
+                </p>
+                { profileUsername === username & profileUsername !== null ? <img onClick={() => verifyDelete(_id)} src={Delete} /> : null }
             </div>
         </div>
     )
 }
 
+// src={profileFavorites.includes(_id) ? Favorited : Favorite}
+
 const mapStateToProps = state => {
     return {
-        username: state.accounts.profile.username
+        profile: state.accounts.profile
     }
 }
 

@@ -20,6 +20,9 @@ const AccountSchema = new Schema({
     name: {
         type: String,
         required: true
+    },
+    favorites: {
+        type: Array
     }
 })
 

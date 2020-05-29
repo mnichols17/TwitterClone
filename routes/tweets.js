@@ -47,7 +47,6 @@ router.put('/favorite', auth, (req, res) => {
         { $inc: {favorites: add}}
     )
     .then(response => {
-        console.log(response)
         res.json({msg: "Favorites modified"})
     })
 })
