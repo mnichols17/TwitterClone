@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import {deleteReply} from '../actions/replyActions';
+import {editFavorites, deleteReply} from '../actions/replyActions';
 import Favorite from '../media/favorite.png';
 import Favorited from '../media/favorited.png';
 import Delete from '../media/delete.png';
@@ -11,7 +11,7 @@ function Reply(props) {
 
     const [isFavorited, setFavorite] = useState(false);
 
-    const {_id, username, body, date, favorites} = props.reply
+    const {_id, username, body, date, favorites, originalTweet} = props.reply
     const profileUsername = props.profile.username,
             profileFavorites = props.profile.favorites ? props.profile.favorites : [];
 
@@ -27,11 +27,11 @@ function Reply(props) {
     }
 
     const handleFavorite = (e, id) => {
-        //props.editFavorties(id, isFavorited ? -1 : 1)
+        props.editFavorites(id, isFavorited ? -1 : 1)
     }
 
     useEffect(() => {
-        //setFavorite(profileFavorites.includes(_id));
+        setFavorite(profileFavorites.includes(_id));
     })
 
     return(
@@ -59,4 +59,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {deleteReply})(Reply)
+export default connect(mapStateToProps, {deleteReply, editFavorites})(Reply)

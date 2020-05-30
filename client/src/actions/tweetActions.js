@@ -67,36 +67,3 @@ export const deleteTweet = (id) => dispatch => {
         console.log(err)
     })
 }
-
-// export const createReply = (tweetId, body) => dispatch => { 
-//     const token = localStorage.getItem('token');
-//     axios({
-//         method: "POST",
-//         url: "/api/replies",
-//         data: {tweetId, body},
-//         headers: {"x-auth-token": token}
-//     })
-//     .then(res => {
-//         dispatch(getAllTweets())
-//     })
-//     .catch(err => {
-//         console.log(err)
-//     })
-// }
-
-// export const deleteReply = (replyId, body) => dispatch => { 
-//     const token = localStorage.getItem('token');
-//     axios({
-//         method: "DELETE",
-//         url: "/api/replies",
-//         data: {replyId, body},
-//         headers: {"x-auth-token": token}
-//     })
-//     .then(res => {
-//         console.log(res.data)
-//         dispatch(getAllTweets())
-//     })
-//     .catch(err => {
-//         console.log(err)
-//     })
-// }

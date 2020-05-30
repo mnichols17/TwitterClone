@@ -28,7 +28,7 @@ class ViewTweet extends React.Component {
                     return (
                         <div key={reply._id} id="replyLine">
                             <div className="replyTick"><h1 style={{visibility: "hidden"}}>Reply</h1></div>
-                            <Reply reply={reply} />
+                            <Reply reply={reply}/>
                         </div>
                     )
                 })}

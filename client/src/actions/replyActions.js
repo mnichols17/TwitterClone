@@ -1,5 +1,7 @@
 import axios from 'axios';
 import {getAllTweets} from './tweetActions';
+import {getProfile, trackFavorites} from './accountActions';
+import { readSync } from 'fs';
 
 export const getReplies = (tweetId) => dispatch => {
     axios.get(`/api/replies/${tweetId}`)
@@ -46,6 +48,31 @@ export const deleteReply = (replyId, body) => dispatch => {
         dispatch({
             type: "DELETE_REPLY",
             payload: res.data
+        })
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
+export const editFavorites = (replyId, add, tweetId) => dispatch => {
+    const token = localStorage.getItem('token');
+    dispatch(trackFavorites(replyId, add));
+    axios({
+        method: "PUT",
+        url: "/api/replies/favorite",
+        data: {replyId, add},
+        headers: {"x-auth-token": token}
+    })
+    .then(res => {
+        // dispatch(getReplies(tweetId));
+        dispatch(getProfile());
+        dispatch({
+            type: "EDIT_REPLY",
+            payload: {
+                add,
+                replyId
+            }
         })
     })
     .catch(err => {

@@ -34,6 +34,7 @@ function Tweet(props) {
     }
 
     useEffect(() => {
+        console.log("HITTING")
         setFavorite(profileFavorites.includes(_id));
     })
 

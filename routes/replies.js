@@ -50,15 +50,15 @@ router.post('/', auth, (req, res) => {
 
 // PUT: Changes number of favorites on a reply
 router.put('/favorite', auth, (req, res) => {
-    // const {tweetId, add} = req.body;
-    
-    // Tweet.updateOne(
-    //     {_id: tweetId},
-    //     { $inc: {favorites: add}}
-    // )
-    // .then(response => {
-    //     res.json({msg: "Favorites modified"})
-    // })
+    const {replyId, add} = req.body;
+
+    Reply.updateOne(
+        {_id: replyId},
+        { $inc: {favorites: add}}
+    )
+    .then(response => {
+        res.json(response)
+    })
 })
 
 // Delete: Deletes a reply
