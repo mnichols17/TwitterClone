@@ -126,10 +126,17 @@ router.put("/", auth, (req, res) => {
 router.delete("/", auth, (req, res) => {
     Account.findById(req.user.id)
     .then(account => {
-        // also subtract favorties & reply count
+        account.favorites.map(async(favorite) => {
+            await Tweet.updateOne({_id: favorite}, {$inc: {favorites: -1}})
+            await Reply.updateOne({_id: favorite}, {$inc: {favorites: -1}})
+        })
         Tweet.deleteMany({username: account.username})
-        Reply.deleteMany({username: account.username})
-        .then(response => {
+        Reply.find({username: account.username})
+        .then(replies => {
+            replies.map(async(reply) => {
+                await Tweet.updateOne({_id: reply.originalTweet}, {$inc: {replies: -1}})
+                await Reply.deleteOne({_id: reply._id})
+            })
             Account.deleteOne({_id: req.user.id})
             .then(response => res.json({msg: "Account Deleted"}))
         })

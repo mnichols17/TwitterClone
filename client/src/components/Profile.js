@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {logoutAccount, deleteAccount} from '../actions/accountActions';
 import {getAllTweets} from '../actions/tweetActions';
@@ -20,7 +21,6 @@ class Profile extends React.Component {
         if (this.props.profile.username !== this.props.match.params.username) {
             axios.get(`/api/accounts/${this.props.match.params.username}`)
             .then(res => {
-                if(res.data === null) console.log("NULL")
                 this.setState({profile: res.data})
             })
         } else this.setState({profile: this.props.profile})
@@ -34,7 +34,7 @@ class Profile extends React.Component {
     render() {
         const profile = this.state.profile;
         return(
-            <div>
+            profile ? <div>
                 <div id="profile">
                     <h1>@{profile.username}</h1>
                     <h2>{profile.name}</h2>
@@ -50,7 +50,7 @@ class Profile extends React.Component {
                         return profile.username === tweet.username ? <Tweet key={tweet._id} tweet={tweet} /> : null
                     })}
                 </div>
-            </div>
+            </div> : <Redirect to="/" />
         )
     }
 }

@@ -3,7 +3,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
-import {getAllTweets, deleteTweet, editFavorties} from '../actions/tweetActions';
+import {getAllTweets} from '../actions/tweetActions';
 import {getReplies} from '../actions/replyActions';
 import Tweet from './Tweet';
 import Reply from './Reply';
