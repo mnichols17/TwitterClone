@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
 require('dotenv').config()
 
 const Account = require('../models/Account');
@@ -61,7 +60,7 @@ router.put('/favorite', auth, (req, res) => {
     })
 })
 
-// Delete: Deletes a reply
+// Delete: Deletes a reply and updates original tweet reply count
 router.delete('/', auth, (req, res) => {
     const {replyId} = req.body;
     console.log(replyId)

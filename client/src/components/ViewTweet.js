@@ -21,7 +21,8 @@ class ViewTweet extends React.Component {
     render() {
         const foundTweet = this.props.tweets.findIndex((tweet) => this.props.match.params.id === tweet._id)
         return(
-            foundTweet !== -1 ? <div>
+            foundTweet !== -1 ? 
+            <div>
                 <Tweet key={foundTweet} tweet={this.props.tweets[foundTweet]} viewTweet={true} />
                 {this.props.replies.map(reply => {
                     return (

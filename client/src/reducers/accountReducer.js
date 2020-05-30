@@ -1,5 +1,5 @@
 const defaultState = {
-    isAuthenticated: localStorage.getItem('token') ? true : false, // true or false based on token existing
+    isAuthenticated: localStorage.getItem('token') ? true : false,
     profile: {}
 }
 

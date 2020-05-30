@@ -27,7 +27,7 @@ router.get("/:username", (req, res) => {
     .catch(err => res.status(400).json(err))
 })
 
-// POST: Creates an account and assigns token
+// POST: Creates an account, protects password and assigns token
 router.post("/", (req, res) => {
     const {username, password, email, name} = req.body
 
@@ -74,11 +74,8 @@ router.post("/", (req, res) => {
     })
 })
 
-// PUT: Keeps track of tweets that the user favorited // might have to be auth?
+// PUT: Keeps track of tweets that the user favorited
 router.put("/favorite", auth, (req, res) => {
-    
-    console.log(req.user.id)
-
     if(req.body.add > 0){
         Account.update(
             {_id: req.user.id},
@@ -122,7 +119,7 @@ router.put("/", auth, (req, res) => {
     })
 })
 
-// DELETE: Deletes a user account
+// DELETE: Deletes a user account and any tweets/favorites/replies they have. Updates tweets accordingly
 router.delete("/", auth, (req, res) => {
     Account.findById(req.user.id)
     .then(account => {
