@@ -22,6 +22,7 @@ class Timeline extends React.Component {
 }
 
 const mapStateToProps = state => {
+    console.log(state)
     return {
         tweets: state.tweets.tweets 
     }

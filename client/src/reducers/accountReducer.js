@@ -21,7 +21,7 @@ export default function (state = defaultState, action) {
                 ...state,
                 isAuthenticated: true
             }
-        case("LOGOUT_SUCCESS"):
+        case("LOGOUT"):
         case("DELETE_ACCOUNT"):
             return {
                 ...state,

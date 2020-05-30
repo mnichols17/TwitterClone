@@ -9,9 +9,8 @@ export default function (state = defaultState, action) {
                 replies: action.payload
             }
         case("CREATE_REPLY"):
-            state.replies.push(action.payload)
             return {
-                replies: state.replies
+                replies: [action.payload, ...state.replies]
             }
         case("DELETE_REPLY"):
             state.replies = state.replies.filter(reply => reply._id !== action.payload.replyId)

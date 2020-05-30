@@ -32,7 +32,7 @@ router.post('/', auth, (req, res) => {
         newTweet.save()
         .then(tweet => {
             res.status(201).json({
-                msg: "Tweet created"
+                tweet
             })
         })
     })
@@ -63,7 +63,7 @@ router.delete('/', auth, (req, res) => {
             Reply.deleteMany({originalTweet: tweetId})
             .then(response => console.log(response))
             Tweet.deleteOne({_id: tweetId})
-            .then(response => res.json({msg: "Tweet Deleted"}))
+            .then(response => res.json({msg: "Tweet Deleted", tweetId}))
         })
     })
 })

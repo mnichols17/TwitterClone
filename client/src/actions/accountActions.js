@@ -10,7 +10,6 @@ export const getProfile = () => dispatch => {
     .then(res => {
         if(res.data === null){ // FOR ACCOUNTS THAT HAVE BEEN DELETED BUT STILL MAKE IT THROUGH. NEED TO FIX LATER
             console.log(res.data)
-            //dispatch(logoutAccount());
         } else {
             console.log(res.data)
             dispatch({
@@ -98,7 +97,7 @@ export const loginAccount = (user, password) => dispatch => {
 export const logoutAccount = () => dispatch => {
     localStorage.removeItem('token');
     dispatch({
-        type: "LOGOUT_SUCCESS"
+        type: "LOGOUT"
     })
 }
 
@@ -108,7 +107,7 @@ export const registerAccount = (username, password, email, name) => dispatch => 
         localStorage.setItem('token', res.data.token); // Right now returns token and data, might be good for future (not having to call GET ACCOUNT everytime) but for now token is what I want
         dispatch(getProfile())
         dispatch({
-            type: "LOGIN_SUCCESS"
+            type: "LOGIN"
         })
     })
     .catch(err => {

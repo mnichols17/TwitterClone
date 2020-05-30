@@ -26,7 +26,10 @@ export const createTweet = (body) => dispatch => {
         headers: {"x-auth-token": token}
     })
     .then(res => {
-        dispatch(getAllTweets())
+        dispatch({
+            type: "CREATE_TWEET",
+            payload: res.data
+        })
     })
     .catch(err => {
         console.log(err)
@@ -43,9 +46,15 @@ export const editFavorties = (tweetId, add) => dispatch => {
         headers: {"x-auth-token": token}
     })
     .then(res => {
-        console.log(res)
         dispatch(getProfile());
-        dispatch(getAllTweets())
+        //dispatch(getAllTweets())
+        dispatch({
+            type: "EDIT_TWEET",
+            payload: {
+                add,
+                tweetId
+            }
+        })
     })
     .catch(err => {
         console.log(err)
@@ -61,7 +70,11 @@ export const deleteTweet = (id) => dispatch => {
         headers: {"x-auth-token": token}
     })
     .then(res => {
-        dispatch(getAllTweets());
+        //dispatch(getAllTweets());
+        dispatch({
+            type: "DELETE_TWEET",
+            payload: res.data
+        })
     })
     .catch(err => {
         console.log(err)

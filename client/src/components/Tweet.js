@@ -40,10 +40,10 @@ function Tweet(props) {
     return(
         <div key={_id} id="tweet">
             <div className="tweet-user">
-                <h3><Link to={props.viewTweet ? "#" : `/profile/${username}`}>@{username}</Link></h3>
+                <h3><Link to={`/profile/${username}`}>@{username}</Link></h3>
             </div>
             <div className="tweet-body">
-                <p><Link to={`/tweet/${_id}`}>{body}</Link></p>
+                <p><Link to={props.viewTweet ? "#" : `/tweet/${_id}`}>{body}</Link></p>
             </div>
             <div className="tweet-information">
                 <p>{newDate}</p>
