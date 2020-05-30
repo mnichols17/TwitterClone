@@ -1,16 +1,13 @@
 const defaultState = {
     isAuthenticated: localStorage.getItem('token') ? true : false,
-    profile: {}
+    profile: {},
+    error: undefined
 }
 
 export default function (state = defaultState, action) {
     switch(action.type){
-        case("GET_ACCOUNT"):
-            return {
-                ...state
-            }
         case("GET_PROFILE"):
-        case("EDIT_ACCOUNT"):
+        case("EDIT_ACCOUNT_INFO"):
             return {
                 ...state,
                 profile: action.payload
@@ -18,21 +15,21 @@ export default function (state = defaultState, action) {
         case("REGISTER_ACCOUNT"):
         case("LOGIN_SUCCESS"):
             return {
-                ...state,
-                isAuthenticated: true
+                isAuthenticated: true,
+                profile: action.payload
             }
         case("LOGOUT"):
         case("DELETE_ACCOUNT"):
             return {
-                ...state,
+                profile: {},
                 isAuthenticated: false
             }
         case("LOGIN_FAIL"):
         case("ERROR"):
-            console.log(action.payload);
             return {
-                ...state,
-                isAuthenticated: false
+                profile: {},
+                isAuthenticated: false,
+                error: action.payload
             }
         default:
             return state;

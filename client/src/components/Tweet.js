@@ -48,14 +48,14 @@ function Tweet(props) {
             <div className="tweet-information">
                 <p>{newDate}</p>
                 <p className="tweet-details">
-                    <img onClick={(event) => handleFavorite(event, _id)} src={isFavorited ? Favorited : Favorite} />
+                    <img alt="favorite" onClick={(event) => handleFavorite(event, _id)} src={isFavorited ? Favorited : Favorite} />
                     {favorites}
                 </p>
                 <p className="tweet-details">
-                    <img id="reply" onClick={() => setReplying(!isReplying)} src={ReplyIcon} />
+                    <img alt="reply" id="reply" onClick={() => setReplying(!isReplying)} src={ReplyIcon} />
                     {replies}
                 </p>
-                <img style={{visibility: profileUsername === username & profileUsername !== null ? "visible" : "hidden"}} onClick={() => verifyDelete(_id)} src={Delete} />
+                <img alt="delete" style={{visibility: profileUsername === username & profileUsername !== null ? "visible" : "hidden"}} onClick={() => verifyDelete(_id)} src={Delete} />
             </div>
             {isReplying ? <SendReply tweetId={_id} setReplying={setReplying}/> : null}
         </div>

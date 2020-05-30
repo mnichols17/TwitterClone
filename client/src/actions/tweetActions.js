@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {getProfile , trackFavorites} from './accountActions';
+import {trackFavorites} from './accountActions';
 
 export const getAllTweets = () => dispatch => { 
     axios({
@@ -46,8 +46,6 @@ export const editFavorties = (tweetId, add) => dispatch => {
         headers: {"x-auth-token": token}
     })
     .then(res => {
-        dispatch(getProfile());
-        //dispatch(getAllTweets())
         dispatch({
             type: "EDIT_TWEET",
             payload: {
@@ -70,7 +68,6 @@ export const deleteTweet = (id) => dispatch => {
         headers: {"x-auth-token": token}
     })
     .then(res => {
-        //dispatch(getAllTweets());
         dispatch({
             type: "DELETE_TWEET",
             payload: res.data

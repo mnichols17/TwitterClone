@@ -35,7 +35,8 @@ router.post('/', (req, res) => {
                     profile: {
                         username: account.username,
                         name: account.name,
-                        email: account.email
+                        email: account.email,
+                        favorites: account.favorites
                     }
                 })
             })

@@ -33,12 +33,18 @@ const Routes = () => {
     )
 }
 
+const errorAlert = errorMsg => {
+    // reset error
+    return alert(errorMsg)
+}
+
 // Change to function?
 class App extends React.Component {
 
     render() {
         return(
             <Router>
+                {this.props.error !== undefined ? errorAlert(this.props.error) : null}
                 {this.props.isAuthenticated === true ? <Navbar /> : null}
                 {this.props.isAuthenticated ? authRoutes(this.props) : Routes()}
             </Router>
@@ -49,7 +55,8 @@ class App extends React.Component {
 const mapStateToProps = state => {
     return {
         isAuthenticated: state.accounts.isAuthenticated,
-        profile: state.accounts.profile
+        profile: state.accounts.profile,
+        error: state.accounts.error
     }
 }
 

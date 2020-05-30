@@ -11,7 +11,7 @@ function Reply(props) {
 
     const [isFavorited, setFavorite] = useState(false);
 
-    const {_id, username, body, date, favorites, originalTweet} = props.reply
+    const {_id, username, body, date, favorites} = props.reply
     const profileUsername = props.profile.username,
             profileFavorites = props.profile.favorites ? props.profile.favorites : [];
 
@@ -45,10 +45,10 @@ function Reply(props) {
             <div className="tweet-information">
                 <p>{newDate}</p>
                 <p className="tweet-details">
-                    <img onClick={(event) => handleFavorite(event, _id)} src={isFavorited ? Favorited : Favorite} />
+                    <img alt="favorite" onClick={(event) => handleFavorite(event, _id)} src={isFavorited ? Favorited : Favorite} />
                     {favorites}
                 </p>
-                <img style={{visibility: profileUsername === username & profileUsername !== null ? "visible" : "hidden"}} onClick={() => verifyDelete(_id)} src={Delete} />
+                <img alt="delete" style={{visibility: profileUsername === username & profileUsername !== null ? "visible" : "hidden"}} onClick={() => verifyDelete(_id)} src={Delete} />
             </div>
         </div>
     )

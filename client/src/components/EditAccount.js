@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
 import {editAccount} from '../actions/accountActions';
 
 function EditAccount(props) {

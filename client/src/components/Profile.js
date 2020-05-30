@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -10,6 +10,7 @@ import Tweet from './Tweet';
 
 class Profile extends React.Component {
 
+    // use a hook?
     state = {
         edit: false,
         profile: {}
@@ -17,7 +18,6 @@ class Profile extends React.Component {
 
     componentDidMount = async() => {
         this.props.getAllTweets();
-        console.log(this.props.match.params.username);
         if (this.props.profile.username !== this.props.match.params.username) {
             axios.get(`/api/accounts/${this.props.match.params.username}`)
             .then(res => {

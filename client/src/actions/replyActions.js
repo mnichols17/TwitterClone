@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {getAllTweets} from './tweetActions';
-import {getProfile, trackFavorites} from './accountActions';
+import {trackFavorites} from './accountActions';
 
 export const getReplies = (tweetId) => dispatch => {
     axios.get(`/api/replies/${tweetId}`)
@@ -43,7 +43,6 @@ export const editFavorites = (replyId, add) => dispatch => {
         headers: {"x-auth-token": token}
     })
     .then(res => {
-        dispatch(getProfile());
         dispatch({
             type: "EDIT_REPLY",
             payload: {

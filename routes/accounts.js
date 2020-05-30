@@ -82,8 +82,10 @@ router.put("/favorite", auth, (req, res) => {
             { $push: {favorites: req.body.tweetId}}
         )
         .then(msg => {
-            console.log(msg)
-            res.json("Tweet Added")
+            res.json({
+                id: req.body.tweetId,
+                add: true
+            })
         })
     } else {
         Account.update(
@@ -91,8 +93,10 @@ router.put("/favorite", auth, (req, res) => {
             { $pull: {favorites: req.body.tweetId}}
         )
         .then(msg => {
-            console.log(msg)
-            res.json("Tweet removed")
+            res.json({
+                id: req.body.tweetId,
+                add: false
+            })
         })
     }
     
