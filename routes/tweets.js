@@ -5,6 +5,7 @@ require('dotenv').config()
 
 const Account = require('../models/Account');
 const Tweet = require('../models/Tweet');
+const Reply = require('../models/Reply');
 const auth = require('../middleware/auth');
 
 // Route: /api/tweets
@@ -59,7 +60,9 @@ router.delete('/', auth, (req, res) => {
         Tweet.findById(tweetId)
         .then(tweet => {
             if (tweet.username !== account.username) return res.status(400).json({Error: "You are not authorized to delete this tweet"})
-
+            
+            Reply.deleteMany({originalTweet: tweetId})
+            .then(response => console.log(response))
             Tweet.deleteOne({_id: tweetId})
             .then(response => res.json({msg: "Tweet Deleted"}))
         })

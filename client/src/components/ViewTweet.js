@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 import {getAllTweets, deleteTweet, editFavorties} from '../actions/tweetActions';
 import {getReplies} from '../actions/replyActions';
@@ -19,11 +19,10 @@ class ViewTweet extends React.Component {
     }
 
     render() {
+        const foundTweet = this.props.tweets.findIndex((tweet) => this.props.match.params.id === tweet._id)
         return(
-            <div>
-                {this.props.tweets.map(tweet => 
-                    this.props.match.params.id === tweet._id ? <Tweet key={tweet._id} tweet={tweet} viewTweet={true} /> : null
-                )}
+            foundTweet !== -1 ? <div>
+                <Tweet key={foundTweet} tweet={this.props.tweets[foundTweet]} viewTweet={true} />
                 {this.props.replies.map(reply => {
                     return (
                         <div key={reply._id} id="replyLine">
@@ -32,7 +31,7 @@ class ViewTweet extends React.Component {
                         </div>
                     )
                 })}
-            </div>
+            </div> : <Redirect to="/" />
         )
     }
 }
