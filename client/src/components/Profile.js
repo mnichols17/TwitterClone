@@ -16,14 +16,26 @@ class Profile extends React.Component {
         profile: {}
     }
 
-    componentDidMount = async() => {
+    componentDidMount = () => {
         this.props.getAllTweets();
         if (this.props.profile.username !== this.props.match.params.username) {
             axios.get(`/api/accounts/${this.props.match.params.username}`)
             .then(res => {
                 this.setState({profile: res.data})
             })
-        } else this.setState({profile: this.props.profile})
+        } else {
+            this.setState({profile: this.props.profile})
+        }
+    }
+
+    componentDidUpdate = (prevProps) => {
+        if(prevProps.profile !== this.props.profile){
+            this.setState({
+                edit: false,
+                profile: this.props.profile,
+            })
+            this.props.getAllTweets();
+        }
     }
 
     deleteAccount = () => {

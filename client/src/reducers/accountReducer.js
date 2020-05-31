@@ -10,7 +10,8 @@ export default function (state = defaultState, action) {
         case("EDIT_ACCOUNT_INFO"):
             return {
                 ...state,
-                profile: action.payload
+                profile: action.payload,
+                error: undefined
             }
         case("REGISTER_ACCOUNT"):
         case("LOGIN_SUCCESS"):
@@ -23,6 +24,11 @@ export default function (state = defaultState, action) {
             return {
                 profile: {},
                 isAuthenticated: false
+            }
+        case("EDIT_ACCOUNT_ERROR"):
+            return{
+                ...state,
+                error: action.payload
             }
         case("LOGIN_FAIL"):
         case("ERROR"):

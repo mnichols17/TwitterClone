@@ -36,8 +36,8 @@ router.post("/", (req, res) => {
     Account.findOne(
         { 
             $or: [
-                {username: username},
-                {email: email}
+                {username: { $regex: username, $options: 'i' }},
+                {email: { $regex: email, $options: 'i' }}
             ]
         }
     )
@@ -105,7 +105,7 @@ router.put("/favorite", auth, (req, res) => {
 // PUT: Edits a user account (using token) //look into findOneAndUpdate or one of the .updates
 router.put("/", auth, (req, res) => {
     // Test for multiple input changes & check if fields exist
-    Account.findOne({username: req.body.username})
+    Account.findOne({username: { $regex: req.body.username, $options: 'i' }})
     .then(account => {
         if(account) return res.status(400).json({Error: "An account with that username already exists"})
 

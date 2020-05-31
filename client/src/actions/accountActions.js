@@ -52,7 +52,7 @@ export const editAccount = (username) => dispatch => {
     })
     .catch(err => {
         dispatch({
-            type: "ERROR",
+            type: "EDIT_ACCOUNT_ERROR",
             payload: err.response.data.Error
         })
     })

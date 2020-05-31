@@ -10,15 +10,15 @@ const Account = require('../models/Account');
 
 // POST: Authenticates account and returns access token
 router.post('/', (req, res) => {
-    const {user, password} = req.body;
+    let {user, password} = req.body;
 
     if(!user || !password) return res.status(400).json({Error: "Missing Account Information"})
 
     Account.findOne(
         { 
             $or: [
-                {username: user},
-                {email: user}
+                {username: { $regex: user, $options: 'i' }},
+                {email: { $regex: user, $options: 'i' }}
             ]
         }
     )

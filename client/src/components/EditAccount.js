@@ -6,8 +6,9 @@ function EditAccount(props) {
 
     const [username, setUsername] = useState("");
 
-    const onSubmit = e => {
+    const onSubmit = async(e) => {
         if(username !== "") {
+            e.preventDefault();
             props.editAccount(username)
             props.history.push(`/profile/${username}`)
         } else {
@@ -26,4 +27,10 @@ function EditAccount(props) {
     )
 }
 
-export default connect(null, {editAccount})(EditAccount)
+const mapStateToProps = state => {
+    return {
+        error: state.accounts.error
+    }
+}
+
+export default connect(mapStateToProps, {editAccount})(EditAccount)
