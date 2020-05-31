@@ -29,7 +29,7 @@ class Profile extends React.Component {
     }
 
     componentDidUpdate = (prevProps) => {
-        if(prevProps.profile !== this.props.profile){
+        if(prevProps.profile !== this.props.profile || prevProps.match.params.username !== this.props.match.params.username){
             this.setState({
                 edit: false,
                 profile: this.props.profile,
