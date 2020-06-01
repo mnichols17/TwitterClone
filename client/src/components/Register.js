@@ -26,11 +26,11 @@ function Register(props) {
             </div>
             <div>
                 <label htmlFor="username">Username:</label>
-                <input type="text" id="username" onChange={e => {setUsername(e.target.value)}} value={newUsername}/>
+                <input maxLength="16" type="text" id="username" onChange={e => {setUsername(e.target.value)}} value={newUsername}/>
             </div>
             <div>
                 <label htmlFor="password">Password:</label>
-                <input type="password" id="password" onChange={e => {setPassword(e.target.value)}} value={newPassword} />
+                <input maxLength="16" type="password" id="password" onChange={e => {setPassword(e.target.value)}} value={newPassword} />
             </div>
             <div>
                 <label htmlFor="email">Name:</label>

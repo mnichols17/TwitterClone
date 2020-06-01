@@ -101,7 +101,7 @@ body {
 #register div {
     display: flex;
     justify-content: center;
-    align-items: baseline;
+    align-items: center;
     margin-bottom: 5%;
 }
 
@@ -133,6 +133,7 @@ body {
     font-size: 1.4em;
     color: #213c5e;
     text-decoration: none;
+    width: 120px;
 }
 
 #register button:hover {
@@ -421,6 +422,10 @@ body {
         width: 260px;
     }
 
+    #register button {
+        width: 120px;
+    }
+
     #sendTweet textarea {
         width: 320px;
     }
@@ -485,7 +490,6 @@ body {
 
     #register div {
         width: 400px;
-        align-items: baseline;
     }
 
     #register div:last-child {
