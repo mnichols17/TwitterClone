@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// (id in DB) username associated with tweet, tweetbody, date tweeted
 const TweetSchema = new Schema({
     username: {
         type: String,

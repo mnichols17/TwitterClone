@@ -33,6 +33,8 @@ router.post("/", (req, res) => {
 
     if(!username || !password || !email || !name) return res.status(400).json({Error: "Please enter all fields"})
 
+    if(/\s/g.test(username) || /\s/g.test(password) || /\s/g.test(email)) return res.status(400).json({Error: "No whitespace is allowed in the username, password or email"})
+
     Account.findOne(
         { 
             $or: [

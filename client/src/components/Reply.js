@@ -32,7 +32,7 @@ function Reply(props) {
 
     useEffect(() => {
         setFavorite(profileFavorites.includes(_id));
-    })
+    }, [profileFavorites, _id])
 
     return(
         <div key={_id} id="tweet">

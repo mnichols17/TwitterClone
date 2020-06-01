@@ -6,7 +6,6 @@ function Register(props) {
 
     const [newUsername, setUsername] = useState("");
     const [newPassword, setPassword] = useState("");
-    // check password const [newPassword, setPassword] = useState(0);
     const [newEmail, setEmail] = useState("");
     const [newName, setName] = useState("");
 
@@ -31,9 +30,8 @@ function Register(props) {
             </div>
             <div>
                 <label htmlFor="password">Password:</label>
-                <input type="text" id="password" onChange={e => {setPassword(e.target.value)}} value={newPassword} />
+                <input type="password" id="password" onChange={e => {setPassword(e.target.value)}} value={newPassword} />
             </div>
-            {/* add a check for password */}
             <div>
                 <label htmlFor="email">Name:</label>
                 <input type="text" id="name" onChange={e => {setName(e.target.value)}} value={newName} />

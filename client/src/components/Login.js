@@ -24,7 +24,7 @@ function Login(props) {
             </div>
             <div>
                 <label htmlFor="password">Password:</label>
-                <input type="text" id="password" onChange={e => {setPassword(e.target.value)}} value={password} />
+                <input type="password" id="password" onChange={e => {setPassword(e.target.value)}} value={password} />
             </div>
             <button type="submit">Login</button>
         </form>

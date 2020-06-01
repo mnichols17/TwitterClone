@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// (id in DB) original tweet ID that reply is towards, username associated with reply, reply body, date replied
 const ReplySchema = new Schema({
     originalTweet: {
         type: String,
