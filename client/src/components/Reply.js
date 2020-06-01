@@ -48,6 +48,7 @@ function Reply(props) {
                     <img alt="favorite" onClick={(event) => handleFavorite(event, _id)} src={isFavorited ? Favorited : Favorite} />
                     {favorites}
                 </p>
+                <p style={{hidden:"true"}}></p>
                 <img alt="delete" style={{visibility: profileUsername === username & profileUsername !== null ? "visible" : "hidden"}} onClick={() => verifyDelete(_id)} src={Delete} />
             </div>
         </div>

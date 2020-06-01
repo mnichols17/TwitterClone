@@ -47,14 +47,19 @@ class Profile extends React.Component {
         const profile = this.state.profile;
         return(
             profile ? <div>
+                <div style={{display: this.props.profile.username !== profile.username ? "none" : null}} id="profileButtons">
+                        <button onClick={() => this.setState({edit: !this.state.edit})}>Edit Account</button>
+                        <button onClick={this.props.logoutAccount}>Logout</button>
+                        <button id="deleteAccount" onClick={this.deleteAccount}>Delete Account</button>
+                </div>
                 <div id="profile">
                     <h1>@{profile.username}</h1>
                     <h2>{profile.name}</h2>
-                    <div style={{display: this.props.profile.username !== profile.username ? "none" : null}} id="profileButtons">
+                    <div style={{display: this.props.profile.username !== profile.username ? "none" : null}} id="profileButtons-mobile">
                         <button onClick={() => this.setState({edit: !this.state.edit})}>Edit Account</button>
                         <button onClick={this.props.logoutAccount}>Logout</button>
                     </div> 
-                    { this.state.edit ? <EditAccount history={this.props.history} /> : <button id="deleteAccount" style={{display: this.props.profile.username !== profile.username ? "none" : null}} onClick={this.deleteAccount}>DELETE ACCOUNT</button> }
+                    { this.state.edit ? <EditAccount history={this.props.history} /> : <button id="deleteAccount-mobile" style={{display: this.props.profile.username !== profile.username ? "none" : null}} onClick={this.deleteAccount}>DELETE ACCOUNT</button> }
                 </div>
                 <div id="profileTweets">
                     <h3>@{profile.username}'s Tweets:</h3>

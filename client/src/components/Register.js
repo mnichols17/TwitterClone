@@ -42,7 +42,9 @@ function Register(props) {
                 <label htmlFor="email">Email:</label>
                 <input type="email" id="email" onChange={e => {setEmail(e.target.value)}} value={newEmail} />
             </div>
-            <button type="submit">Register</button>
+            <div>
+                <button type="submit">Register</button>
+            </div>
         </form>
     )
 }

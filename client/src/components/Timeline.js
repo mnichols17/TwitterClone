@@ -12,7 +12,7 @@ class Timeline extends React.Component {
 
     render() {
         return(
-            <div>
+            <div id="timeline">
                 {this.props.tweets.map(tweet => {
                     return <Tweet key={tweet._id} tweet={tweet} />
                 })}
@@ -22,7 +22,6 @@ class Timeline extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state)
     return {
         tweets: state.tweets.tweets 
     }

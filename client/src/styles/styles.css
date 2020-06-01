@@ -25,7 +25,9 @@ body {
 #home a {
     background: #6ebbeb;
     border-radius: 12px;
-    padding: 4%;
+    text-align: center;
+    padding: 2%;
+    width: 100px;
     font-size: 1.17em;
     color: #213c5e;
     text-decoration: none;
@@ -99,13 +101,13 @@ body {
 #register div {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: baseline;
     margin-bottom: 5%;
 }
 
 #register > div > label {
     text-transform: uppercase;
-    flex: 1 1 10px;
+    flex: 1 0 10px;
 }
 
 #register > div > input {
@@ -113,7 +115,7 @@ body {
     padding: 1%;
     font-size: 1em;
     border: 2px solid #213c5e;
-    border-radius: 6px;
+    border-radius: 8px;
 } 
 
 #register > div > input:focus {
@@ -122,6 +124,7 @@ body {
 }
 
 #register button {
+    text-align: center;
     margin-top: 8%;
     background: #6ebbeb;
     border: 0px;
@@ -199,12 +202,16 @@ body {
 }
 
 #profileButtons {
+    display: none;
+}
+
+#profileButtons-mobile {
     display: flex;
     justify-content: space-evenly;
     margin: 5%;
 }
 
-#profileButtons button {
+#profileButtons-mobile button {
     background: #213c5e;
     margin: 0% 2%;
     padding: 5%;
@@ -220,7 +227,7 @@ body {
     color: #6ebbeb;
 }
 
-#deleteAccount {
+#deleteAccount-mobile {
     margin: 2% 25%;
     padding: 2%;
     border-radius: 8px;
@@ -273,6 +280,8 @@ body {
     width: 300px;
     font-size: .9em;
     color: #213c5e;
+    resize: none;
+    border-radius: 12px;
 }
 
 #sendTweet div {
@@ -285,7 +294,7 @@ body {
 #sendTweet button {
     background: #6ebbeb;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     width: 60px;
     font-size: 1em;
     padding: 2%; 
@@ -307,10 +316,6 @@ body {
     color: white;
 }
 
-/* #tweet:last-child {
-    border-bottom: none;
-} */
-
 .tweet-user > h3 {
     margin: 0% 0% 0% 2%;
 }
@@ -318,7 +323,6 @@ body {
 .tweet-user a, .tweet-user a:visited {
     color: #6ebbeb;
     text-decoration: none;
-
 }
 
 .tweet-body {
@@ -364,6 +368,7 @@ body {
 .tweet-information > p {
     font-size: .7em;
     margin: 2%;
+    color: lightgrey;
 }
 
 /* Reply Timeline */
@@ -380,4 +385,318 @@ body {
 .replyTick, .replyTick h1 {
     border-right: 2px solid #6ebbeb;
     max-width: 20px;
+}
+
+/* Different Screen Sizes */ 
+
+@media screen and (max-width: 330px) {
+    #home h1 {
+        font-size: 2.9em;
+    }
+
+    #register > div > input {
+        width: 180px;
+    }
+
+    #sendTweet textarea {
+        width: 280px;
+    }
+
+    #profileButtons-mobile button {
+        padding: 5%;
+        font-size: .9em;
+    }
+
+    #editAccount button {
+        font-size: .96em;
+    }
+
+    #deleteAccount {
+        font-size: .75em;
+    }
+}
+
+@media screen and (min-width: 410px) {
+    #register > div > input {
+        width: 260px;
+    }
+
+    #sendTweet textarea {
+        width: 320px;
+    }
+
+    .tweet-body a {
+        font-size: 1.05em;
+    }
+
+    .tweet-information p {
+        font-size: .75em;
+    }
+
+    .tweet-information img {
+        max-width: 18px;
+    }
+}
+
+@media screen and (min-width: 535px) {
+    body {
+        display: flex;
+        justify-content: center;
+    }
+
+    #root {
+        width: 75%;
+    }
+
+    * button:hover, * img:hover {
+        cursor: pointer;
+    }
+
+    #home {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #home h1 {
+        font-size: 4em;
+        color: 	#6ebbeb;
+        text-align: center;
+    }
+
+    #home a {
+        background: none;
+        color: #6ebbeb;
+        border-radius: 12px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 1.1em;
+        margin: 1%;
+    }
+
+    #home a:hover {
+        background: none;
+        color: #0e98da;
+    }
+
+    #register {
+        align-items: center;
+    }
+
+    #register div {
+        width: 400px;
+        align-items: baseline;
+    }
+
+    #register div:last-child {
+        width: 600px;
+    }
+
+    #register > div > input {
+        font-size: 1.1em;  
+    }
+
+    #register label {
+        font-size: 1.2em;
+    }
+
+    #register button {
+        padding: 1.8%;
+        font-size: 1.25em;
+    }
+
+    #navbar a {
+        font-size: 1.3em;
+    }
+
+    #navbar #profile-link, #navbar button {
+        max-width: 20%;
+        width: 20%;
+    }
+    
+    #profile-link:hover {
+        color: #0e98da;
+        cursor: pointer;
+    }
+
+    #navbar button {
+        padding: 1.5%;
+        font-size: 1.1em;
+    }
+
+    #navbar button:hover {
+        background: #0e98da;
+        cursor: pointer;
+    }
+
+    #profile {
+        margin-top: 2%;
+    }
+
+    #editAccount button:hover {
+        background: #0064a7;
+    }
+
+    #profileButtons-mobile, #deleteAccount-mobile {
+        display: none;
+    }
+ 
+    #profileButtons {
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        margin: 2%;
+        background: none;
+    }
+    
+    #profileButtons > button:first-child, #deleteAccount {
+        width: 35%;
+    }
+
+    #profileButtons button {
+        font-size: 1em;
+        background: none;
+        border: none;
+        color: #6ebbeb;
+        text-align: center;
+    }
+
+    #profileButtons button:hover {
+        text-decoration: underline;
+    }
+
+    #deleteAccount {
+        background: #213c5e;
+        color: #6ebbeb; 
+    }
+
+    #deleteAccount:hover {
+        color: #F73939;
+    }
+
+    #editAccount {
+        align-items: center;
+    }
+
+    #editAccount label, #editAccount input {
+        width: 50%;
+        font-size: 1.2em;
+    }
+
+    #editAccount button {
+        padding: 3%;
+        font-size: 1em;
+    }
+
+    #sendTweet textarea {
+        font-size: 1.15em;
+        width: 75%;
+    }
+
+    #sendTweet button {
+        font-size: 1em;
+        width: 20%;
+    }
+
+    #sendTweet p {
+        font-size: .8em;
+    }
+
+    #tweet {
+        margin: 2%;
+        padding: 1%;
+    }
+
+    .tweet-user > h3 {
+        font-size: 1.35em;
+    }
+
+    .tweet-body > p{
+        font-size: 1.05em;
+        margin-left: 1%;
+    }
+
+    .tweet-details img {
+        max-width: 20px;
+    }
+
+    .tweet-details #reply {
+        max-width: 22px;
+    }
+
+    .tweet-information > p {
+        font-size: .8em;
+    }
+
+    .replyTick, .replyTick h1 {
+        max-width: 40px;
+    }
+}
+
+@media screen and (min-width: 750px) {
+    #navbar #profile-link, #navbar button {
+        width: 15%;
+    }
+
+    #profileButtons > button:first-child, #deleteAccount {
+        width: 25%;
+    }
+
+    #editAccount button {
+        padding: 3%;
+        font-size: 1.1em;
+    }
+}
+
+@media screen and (min-width: 950px) {
+    #root {
+        width: 60%;
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    #root {
+        width: 50%;
+    }
+
+    #navbar #profile-link, #navbar button {
+        max-width: 15%;
+        width: 15%;
+    }
+
+    #profileButtons > button:first-child, #deleteAccount {
+        width: 25%;
+    }
+
+    #sendTweet button {
+        font-size: 1.2em;
+        width: 18%;
+    }
+
+    #sendTweet p {
+        font-size: 1em;
+    }
+
+    .tweet-body > p{
+        font-size: 1.15em;
+    }
+
+    .tweet-details img {
+        max-width: 25px;
+    }
+
+    .tweet-details #reply {
+        max-width: 26px;
+    }
+
+    .tweet-information > p {
+        font-size: .9em;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    #editAccount button {
+        padding: 2%;
+        font-size: 1em;
+    }
 }
