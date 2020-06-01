@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
     Account.findOne(
         { 
             $or: [
-                {username: { $regex: user, $options: 'i' }},
+                {username: { $regex: new RegExp("^" + user + "$", "i")}},
                 {email: { $regex: user, $options: 'i' }}
             ]
         }
@@ -42,6 +42,7 @@ router.post('/', (req, res) => {
             })
         })
     })
+    .catch(err => console.log(err))
 })
 
 module.exports = router;
