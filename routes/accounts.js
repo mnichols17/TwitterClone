@@ -128,12 +128,12 @@ router.put("/", auth, (req, res) => {
 // DELETE: Deletes a user account and any tweets/favorites/replies they have. Updates tweets accordingly
 router.delete("/", auth, (req, res) => {
     Account.findById(req.user.id)
-    .then(account => {
+    .then(async(account) => {
         account.favorites.map(async(favorite) => {
             await Tweet.updateOne({_id: favorite}, {$inc: {favorites: -1}})
             await Reply.updateOne({_id: favorite}, {$inc: {favorites: -1}})
         })
-        Tweet.deleteMany({username: account.username})
+        await Tweet.deleteMany({username: account.username})
         Reply.find({username: account.username})
         .then(replies => {
             replies.map(async(reply) => {
