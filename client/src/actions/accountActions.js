@@ -17,7 +17,7 @@ export const getProfile = () => dispatch => {
         localStorage.removeItem('token');
         dispatch({
             type: "ERROR",
-            payload: err
+            payload: err.response.data.Error + ". Login again"
         })
     })
 }
