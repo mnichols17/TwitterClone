@@ -7,7 +7,7 @@
   * /api/accounts for Accounts
   * /api/tweets for Tweets
   * /api/replies for Replies
-- DB contains collection of user accounts, tweets, replies
+- DB contains collection of user accounts, tweets & replies
 - User passwords protected with salt and hashing using [bcryptjs](https://www.npmjs.com/package/bcryptjs)
 - Authentication for protected routes using [JWT](https://www.npmjs.com/package/jsonwebtoken)
 
